@@ -1,11 +1,6 @@
 import java.util.Scanner;
 
 public class Xenon {
-    public static void main(String[] args) {
-        greet();
-        chat();
-        exit();
-    }
 
     public static void greet() {
         System.out.println("----------------------------------------------");
@@ -15,7 +10,7 @@ public class Xenon {
         System.out.println("----------------------------------------------");
     }
 
-    public static void chat() {
+    public void chat() {
         Scanner scanner = new Scanner(System.in);
         String input;
 
