@@ -42,7 +42,18 @@ public class Xenon {
                 tasks[taskIndex].markAsDone();
 
                 System.out.println("----------------------------------------------");
-                System.out.println("Xenon: Nice! I've marked this task as done: \n" + tasks[taskIndex]);
+                System.out.println("Xenon: Nice! I've marked this task as done: \n" + "\t" + tasks[taskIndex]);
+                System.out.println("----------------------------------------------");
+                continue;
+            }
+
+            if (input.split("\\s+")[0].equals("unmark")) {
+                String taskId = input.split("\\s+")[1];
+                int taskIndex = Integer.parseInt(taskId) - 1;
+                tasks[taskIndex].markAsNotDone();
+
+                System.out.println("----------------------------------------------");
+                System.out.println("Xenon: Ok, I've marked this task as not done yet: \n" + "\t" + tasks[taskIndex]);
                 System.out.println("----------------------------------------------");
                 continue;
             }
