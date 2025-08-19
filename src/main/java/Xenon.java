@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Xenon {
 
-    private String[] tasks = new String[100];
+    private Task[] tasks = new Task[100];
     private int counter = 0;
 
     public static void greet() {
@@ -36,7 +36,7 @@ public class Xenon {
             } else {
 
                 // Store user input text
-                tasks[counter] = input;
+                tasks[counter] = new Task(input);
                 counter++;
 
                 System.out.println("----------------------------------------------");
