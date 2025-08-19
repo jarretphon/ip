@@ -39,7 +39,7 @@ public class Xenon {
             if (input.split("\\s+")[0].equals("mark")) {
                 String taskId = input.split("\\s+")[1];
                 int taskIndex = Integer.parseInt(taskId) - 1;
-                tasks[taskIndex].isDone = true;
+                tasks[taskIndex].markAsDone();
 
                 System.out.println("----------------------------------------------");
                 System.out.println("Xenon: Nice! I've marked this task as done: \n" + tasks[taskIndex]);
