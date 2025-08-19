@@ -33,6 +33,14 @@ public class Xenon {
                     System.out.println((i + 1) + ". " + tasks[i]);
                 }
                 System.out.println("----------------------------------------------");
+            } else if (input.split("\\s+")[0].equals("mark")) {
+                String taskId = input.split("\\s+")[1];
+                int taskIndex = Integer.parseInt(taskId) - 1;
+                tasks[taskIndex].isDone = true;
+
+                System.out.println("----------------------------------------------");
+                System.out.println("Xenon: Nice! I've marked this task as done: \n" + tasks[taskIndex]);
+                System.out.println("----------------------------------------------");
             } else {
 
                 // Store user input text
