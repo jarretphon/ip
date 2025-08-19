@@ -1,6 +1,9 @@
+import java.util.Scanner;
+
 public class Xenon {
     public static void main(String[] args) {
         greet();
+        chat();
         exit();
     }
 
@@ -9,6 +12,26 @@ public class Xenon {
         System.out.println("Hello! I'm Xenon");
         System.out.println("What can I do for you?");
         System.out.println();
+        System.out.println("----------------------------------------------");
+    }
+
+    public static void chat() {
+        Scanner scanner = new Scanner(System.in);
+        String input;
+
+        while(true) {
+            System.out.print("\t\t\tYou: " );
+            input = scanner.nextLine();
+
+            if (input.equals("bye")) {
+                break;
+            }
+
+            System.out.println("----------------------------------------------");
+            System.out.println("Xenon: " + input);
+            System.out.println("----------------------------------------------");
+        }
+
     }
 
     public static void exit() {
