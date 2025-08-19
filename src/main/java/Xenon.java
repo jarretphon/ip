@@ -2,6 +2,9 @@ import java.util.Scanner;
 
 public class Xenon {
 
+    private String[] tasks = new String[100];
+    private int counter = 0;
+
     public static void greet() {
         System.out.println("----------------------------------------------");
         System.out.println("Hello! I'm Xenon");
@@ -18,13 +21,28 @@ public class Xenon {
             System.out.print("\t\t\tYou: " );
             input = scanner.nextLine();
 
+            // Exit chatbot
             if (input.equals("bye")) {
                 break;
             }
 
-            System.out.println("----------------------------------------------");
-            System.out.println("Xenon: " + input);
-            System.out.println("----------------------------------------------");
+            if (input.equals("list")) {
+                // Display stored user input texts
+                System.out.println("----------------------------------------------");
+                for (int i = 0; i < counter; i++) {
+                    System.out.println((i + 1) + ". " + tasks[i]);
+                }
+                System.out.println("----------------------------------------------");
+            } else {
+
+                // Store user input text
+                tasks[counter] = input;
+                counter++;
+
+                System.out.println("----------------------------------------------");
+                System.out.println("Xenon: added " + input);
+                System.out.println("----------------------------------------------");
+            }
         }
 
     }
