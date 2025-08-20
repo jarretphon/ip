@@ -14,6 +14,13 @@ public class Xenon {
         System.out.println("----------------------------------------------");
     }
 
+    public static void exit() {
+        System.out.println("----------------------------------------------");
+        System.out.println("Xenon: Bye. Hope to see you again soon!");
+        System.out.println();
+        System.out.println("----------------------------------------------");
+    }
+
     public void chat() {
         Scanner scanner = new Scanner(System.in);
         String input;
@@ -33,71 +40,72 @@ public class Xenon {
             }
 
             if (inputTokens.length == 1 && command.equals("list")) {
-                // Display stored user input texts
-                System.out.println("----------------------------------------------");
-                System.out.println("Xenon: Here are the tasks in your list ");
-                for (int i = 0; i < counter; i++) {
-                    System.out.println("\t" + (i + 1) + ". " + tasks[i]);
-                }
-                System.out.println("----------------------------------------------");
+                displayTasks();
                 continue;
             }
 
-            if (command.equals("mark")) {
-                String taskId = contents;
-                int taskIndex = Integer.parseInt(taskId) - 1;
-                tasks[taskIndex].markAsDone();
-
-                System.out.println("----------------------------------------------");
-                System.out.println("Xenon: Nice! I've marked this task as done: \n" + "\t" + tasks[taskIndex]);
-                System.out.println("----------------------------------------------");
+            if (command.equals("mark") || command.equals("unmark")) {
+                toggleComplete(command, contents);
                 continue;
             }
 
-            if (command.equals("unmark")) {
-                String taskId = contents;
-                int taskIndex = Integer.parseInt(taskId) - 1;
-                tasks[taskIndex].markAsNotDone();
-
-                System.out.println("----------------------------------------------");
-                System.out.println("Xenon: Ok, I've marked this task as not done yet: \n" + "\t" + tasks[taskIndex]);
-                System.out.println("----------------------------------------------");
-                continue;
+            if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+                createTask(command, contents);
+                counter++;
             }
-
-            if (command.equals("todo")) {
-                // Get the task description without command
-                tasks[counter] = new ToDoTask(contents);
-            }
-
-            if (command.equals("deadline")) {
-                String[] tokens = contents.split("/by");
-                String description = tokens[0];
-                String deadline = tokens.length > 1 ? tokens[1].trim() : null;
-                tasks[counter] = new DeadlineTask(description, deadline);
-            }
-
-            if (command.equals("event")) {
-                String[] tokens = contents.split("/from|/to");
-                String description = tokens[0];
-                String startDate = tokens.length > 2 ? tokens[1].trim() : null;
-                String endDate = tokens.length > 2 ? tokens[2].trim(): null;
-                tasks[counter] = new Event(description, startDate, endDate);
-            }
-
-            System.out.println("----------------------------------------------");
-            System.out.println("Xenon: added " + tasks[counter]);
-            System.out.println("----------------------------------------------");
-
-            counter++;
         }
 
     }
 
-    public static void exit() {
+    public void displayTasks() {
         System.out.println("----------------------------------------------");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println();
+        System.out.println("Xenon: Here are the tasks in your list ");
+        for (int i = 0; i < counter; i++) {
+            System.out.println("\t" + (i + 1) + ". " + tasks[i]);
+        }
+        System.out.println("----------------------------------------------");
+    }
+
+    public  void toggleComplete(String command, String taskId) {
+        if (taskId == null) return;
+
+        int taskIndex = Integer.parseInt(taskId) - 1;
+
+        System.out.println("----------------------------------------------");
+        if (command.equals("mark")) {
+            tasks[taskIndex].markAsDone();
+            System.out.println("Xenon: Nice! I've marked this task as done: \n" + "\t" + tasks[taskIndex]);
+        } else if (command.equals("unmark")) {
+            tasks[taskIndex].markAsNotDone();
+            System.out.println("Xenon: Ok, I've marked this task as not done yet: \n" + "\t" + tasks[taskIndex]);
+        }
+        System.out.println("----------------------------------------------");
+    }
+
+    public void createTask(String command, String contents) {
+        if (contents == null) return;
+
+        Task task;
+
+        if (command.equals("todo")) {
+            task = new ToDoTask(contents);
+        } else if (command.equals("deadline")) {
+            String[] tokens = contents.split("/by", 2);
+            String description = tokens[0];
+            String deadline = tokens.length > 1 ? tokens[1].trim() : null;
+            task = new DeadlineTask(description, deadline);
+        } else {
+            String[] tokens = contents.split("/from|/to", 3);
+            String description = tokens[0];
+            String startDate = tokens.length > 2 ? tokens[1].trim() : null;
+            String endDate = tokens.length > 2 ? tokens[2].trim() : null;
+            task = new Event(description, startDate, endDate);
+        }
+
+        tasks[counter] = task;
+
+        System.out.println("----------------------------------------------");
+        System.out.println("Xenon: added " + task);
         System.out.println("----------------------------------------------");
     }
 }
