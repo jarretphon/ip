@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Xenon {
 
@@ -21,23 +22,29 @@ public class Xenon {
             System.out.print("\t\t\tYou: " );
             input = scanner.nextLine();
 
+            // transform user input into an array of strings
+            String[] inputTokens = input.split("\\s+", 2);
+            String command = inputTokens[0];
+            String contents = inputTokens.length > 1 ? inputTokens[1]: null;
+
             // Exit chatbot
-            if (input.equals("bye")) {
+            if (inputTokens.length == 1 && command.equals("bye")) {
                 break;
             }
 
-            if (input.equals("list")) {
+            if (inputTokens.length == 1 && command.equals("list")) {
                 // Display stored user input texts
                 System.out.println("----------------------------------------------");
+                System.out.println("Xenon: Here are the tasks in your list ");
                 for (int i = 0; i < counter; i++) {
-                    System.out.println((i + 1) + ". " + tasks[i]);
+                    System.out.println("\t" + (i + 1) + ". " + tasks[i]);
                 }
                 System.out.println("----------------------------------------------");
                 continue;
             }
 
-            if (input.split("\\s+")[0].equals("mark")) {
-                String taskId = input.split("\\s+")[1];
+            if (command.equals("mark")) {
+                String taskId = contents;
                 int taskIndex = Integer.parseInt(taskId) - 1;
                 tasks[taskIndex].markAsDone();
 
@@ -47,8 +54,8 @@ public class Xenon {
                 continue;
             }
 
-            if (input.split("\\s+")[0].equals("unmark")) {
-                String taskId = input.split("\\s+")[1];
+            if (command.equals("unmark")) {
+                String taskId = contents;
                 int taskIndex = Integer.parseInt(taskId) - 1;
                 tasks[taskIndex].markAsNotDone();
 
@@ -58,13 +65,31 @@ public class Xenon {
                 continue;
             }
 
-            // Store user input text
-            tasks[counter] = new Task(input);
-            counter++;
+            if (command.equals("todo")) {
+                // Get the task description without command
+                tasks[counter] = new ToDoTask(contents);
+            }
+
+            if (command.equals("deadline")) {
+                String[] tokens = contents.split("/by");
+                String description = tokens[0];
+                String deadline = tokens.length > 1 ? tokens[1].trim() : null;
+                tasks[counter] = new DeadlineTask(description, deadline);
+            }
+
+            if (command.equals("event")) {
+                String[] tokens = contents.split("/from|/to");
+                String description = tokens[0];
+                String startDate = tokens.length > 2 ? tokens[1].trim() : null;
+                String endDate = tokens.length > 2 ? tokens[2].trim(): null;
+                tasks[counter] = new Event(description, startDate, endDate);
+            }
 
             System.out.println("----------------------------------------------");
-            System.out.println("Xenon: added " + input);
+            System.out.println("Xenon: added " + tasks[counter]);
             System.out.println("----------------------------------------------");
+
+            counter++;
         }
 
     }
