@@ -59,7 +59,7 @@ public class Xenon {
 
     public void displayTasks() {
         System.out.println("----------------------------------------------");
-        System.out.println("Xenon: Here are the tasks in your list ");
+        System.out.println("Xenon: Here are the tasks in your list");
         for (int i = 0; i < counter; i++) {
             System.out.println("\t" + (i + 1) + ". " + tasks[i]);
         }
@@ -74,10 +74,10 @@ public class Xenon {
         System.out.println("----------------------------------------------");
         if (command.equals("mark")) {
             tasks[taskIndex].markAsDone();
-            System.out.println("Xenon: Nice! I've marked this task as done: \n" + "\t" + tasks[taskIndex]);
+            System.out.println("Xenon: Nice! I've marked this task as done:\n" + "\t" + tasks[taskIndex]);
         } else if (command.equals("unmark")) {
             tasks[taskIndex].markAsNotDone();
-            System.out.println("Xenon: Ok, I've marked this task as not done yet: \n" + "\t" + tasks[taskIndex]);
+            System.out.println("Xenon: Ok, I've marked this task as not done yet:\n" + "\t" + tasks[taskIndex]);
         }
         System.out.println("----------------------------------------------");
     }
