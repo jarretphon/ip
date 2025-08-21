@@ -13,6 +13,7 @@ public class Xenon {
         + "- list                                                       -Display created tasks\n"
         + "- mark <task number>                                         -Mark a task as done\n"
         + "- unmark <task number>                                       -Mark a task as undone\n"
+        + "- delete <task number>                                       -Delete a task\n"
         + "- bye                                                        -Exit chatbot";
 
     public static void greet() {
@@ -68,6 +69,11 @@ public class Xenon {
 
                 if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
                     createTask(command, contents);
+                    continue;
+                }
+
+                if (command.equals("delete")) {
+                    deleteTask(contents);
                     continue;
                 }
 
@@ -168,6 +174,33 @@ public class Xenon {
 
         System.out.println("----------------------------------------------");
         System.out.println("Xenon: added " + task);
+        System.out.println("----------------------------------------------");
+    }
+
+    public void deleteTask(String taskId) throws XenonException {
+        if (taskId.isBlank()) {
+            throw new XenonException("Xenon: Please specify the task number to delete");
+        }
+
+        int taskIndex;
+
+        // Ensure that the user provided a numerical taskId
+        try {
+            taskIndex = Integer.parseInt(taskId) - 1;
+        } catch (NumberFormatException e) {
+            throw new XenonException("Xenon: " + taskId + " is not a valid task number");
+        }
+
+        // Ensure that the taskIndex is within the range of available tasks
+        if (taskIndex < 0 || taskIndex > tasks.size() - 1) {;
+            throw new XenonException("Xenon: Task " + (taskIndex + 1) + " does not exist in your list");
+        }
+
+        Task deletedTask = tasks.get(taskIndex);
+        tasks.remove(taskIndex);
+
+        System.out.println("----------------------------------------------");
+        System.out.println("Xenon: Noted. I've removed this task\n" + "\t" + deletedTask);
         System.out.println("----------------------------------------------");
     }
 }
