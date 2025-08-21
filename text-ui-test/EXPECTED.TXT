@@ -8,6 +8,7 @@ Here are the commands you can use:
 - list                                                       -Display created tasks
 - mark <task number>                                         -Mark a task as done
 - unmark <task number>                                       -Mark a task as undone
+- delete <task number>                                       -Delete a task
 - bye                                                        -Exit chatbot
 
 ----------------------------------------------
@@ -26,6 +27,7 @@ Xenon: Here are the commands you can use:
 - list                                                       -Display created tasks
 - mark <task number>                                         -Mark a task as done
 - unmark <task number>                                       -Mark a task as undone
+- delete <task number>                                       -Delete a task
 - bye                                                        -Exit chatbot
 ----------------------------------------------
 			You: ----------------------------------------------
@@ -62,11 +64,18 @@ Xenon: Ok, I've marked this task as not done yet:
 	[T][ ] write essay
 ----------------------------------------------
 			You: ----------------------------------------------
+Xenon: Task -1 does not exist in your list
+If you are unsure of how to use me, type 'help' to see a list of available commands
+----------------------------------------------
+			You: ----------------------------------------------
+Xenon: Noted. I've removed this task
+	[T][ ] write essay
+----------------------------------------------
+			You: ----------------------------------------------
 Xenon: Here are the tasks in your list
 	1. [T][ ] read book
-	2. [T][ ] write essay
-	3. [D][ ] return book  (by: Sunday)
-	4. [E][ ] project meeting (from: Monday to: Wednesday)
+	2. [D][ ] return book  (by: Sunday)
+	3. [E][ ] project meeting (from: Monday to: Wednesday)
 ----------------------------------------------
 			You: ----------------------------------------------
 Xenon: I'm sorry, I do not recognise your command: random
@@ -78,6 +87,7 @@ Here are the commands you can use:
 - list                                                       -Display created tasks
 - mark <task number>                                         -Mark a task as done
 - unmark <task number>                                       -Mark a task as undone
+- delete <task number>                                       -Delete a task
 - bye                                                        -Exit chatbot
 ----------------------------------------------
 			You: ----------------------------------------------
