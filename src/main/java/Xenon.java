@@ -5,20 +5,9 @@ public class Xenon {
 
     private ArrayList<Task> tasks = new ArrayList<>();
 
-    private final static String HELP_TEXT =
-        "Here are the commands you can use:\n"
-        + "- todo <description>                                         -Add a todo task\n"
-        + "- deadline <description> /by <due date>                      -Add a deadline task\n"
-        + "- event <description> /from <start date> /to <end date>      -Add an event\n"
-        + "- list                                                       -Display created tasks\n"
-        + "- mark <task number>                                         -Mark a task as done\n"
-        + "- unmark <task number>                                       -Mark a task as undone\n"
-        + "- delete <task number>                                       -Delete a task\n"
-        + "- bye                                                        -Exit chatbot";
-
     public static void greet() {
         System.out.println("----------------------------------------------");
-        System.out.println("Hello! I'm Xenon\n" + "What can I do for you?\n" + HELP_TEXT);
+        System.out.println("Hello! I'm Xenon\n" + "What can I do for you?\n\n" + Command.usageGuide());
         System.out.println();
         System.out.println("----------------------------------------------");
     }
@@ -43,47 +32,41 @@ public class Xenon {
             String command = inputTokens[0];
             String contents = inputTokens.length > 1 ? inputTokens[1] : "";
 
-            // Exit chatbot
-            if (inputTokens.length == 1 && command.equals("bye")) {
-                break;
-            }
-
-            if (inputTokens.length == 1 && command.equals("help")) {
-                System.out.println("----------------------------------------------");
-                System.out.println("Xenon: " + HELP_TEXT);
-                System.out.println("----------------------------------------------");
-                continue;
-            }
-
             try {
+                Command cmd = Command.fromInput(command);
 
-                if (inputTokens.length == 1 && command.equals("list")) {
+                if (cmd == null) {
+                    System.out.println("----------------------------------------------");
+                    System.out.println(
+                            "Xenon: I'm sorry, I do not recognise your command: "
+                            + command + "\n\n"
+                            + Command.usageGuide()
+                    );
+                    System.out.println("----------------------------------------------");
+                    continue;
+                }
+
+                switch (cmd) {
+                case BYE:
+                    return;
+                case HELP:
+                    System.out.println("----------------------------------------------");
+                    System.out.println("Xenon: " + Command.usageGuide());
+                    System.out.println("----------------------------------------------");
+                    break;
+                case LIST:
                     displayTasks();
-                    continue;
-                }
-
-                if (command.equals("mark") || command.equals("unmark")) {
-                    toggleComplete(command, contents);
-                    continue;
-                }
-
-                if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
-                    createTask(command, contents);
-                    continue;
-                }
-
-                if (command.equals("delete")) {
+                    break;
+                case TODO: case DEADLINE: case EVENT:
+                    createTask(cmd.getKeyword(), contents);
+                    break;
+                case MARK: case UNMARK:
+                    toggleComplete(cmd.getKeyword(), contents);
+                    break;
+                case DELETE:
                     deleteTask(contents);
-                    continue;
+                    break;
                 }
-
-                // Unrecognised command words prompt help text
-                System.out.println("----------------------------------------------");
-                System.out.println(
-                        "Xenon: I'm sorry, I do not recognise your command: " + command + "\n\n" + HELP_TEXT
-                );
-                System.out.println("----------------------------------------------");
-
             } catch (XenonException error) {
                 System.out.println("----------------------------------------------");
                 System.out.println(error);
