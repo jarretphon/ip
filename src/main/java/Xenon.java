@@ -1,10 +1,9 @@
 import java.util.Scanner;
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Xenon {
 
-    private Task[] tasks = new Task[100];
-    private int counter = 0;
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     private final static String HELP_TEXT =
         "Here are the commands you can use:\n"
@@ -69,7 +68,6 @@ public class Xenon {
 
                 if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
                     createTask(command, contents);
-                    counter++;
                     continue;
                 }
 
@@ -92,8 +90,8 @@ public class Xenon {
     public void displayTasks() {
         System.out.println("----------------------------------------------");
         System.out.println("Xenon: Here are the tasks in your list");
-        for (int i = 0; i < counter; i++) {
-            System.out.println("\t" + (i + 1) + ". " + tasks[i]);
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println("\t" + (i + 1) + ". " + tasks.get(i));
         }
         System.out.println("----------------------------------------------");
     }
@@ -113,17 +111,19 @@ public class Xenon {
         }
 
         // Ensure that the taskIndex is within the range of available tasks
-        if (taskIndex < 0 || taskIndex > counter - 1) {;
+        if (taskIndex < 0 || taskIndex > tasks.size() - 1) {;
             throw new XenonException("Xenon: Task " + (taskIndex + 1) + " does not exist in your list");
         }
 
+        Task task = tasks.get(taskIndex);
+
         System.out.println("----------------------------------------------");
         if (command.equals("mark")) {
-            tasks[taskIndex].markAsDone();
-            System.out.println("Xenon: Nice! I've marked this task as done:\n" + "\t" + tasks[taskIndex]);
+            task.markAsDone();
+            System.out.println("Xenon: Nice! I've marked this task as done:\n" + "\t" + task);
         } else if (command.equals("unmark")) {
-            tasks[taskIndex].markAsNotDone();
-            System.out.println("Xenon: Ok, I've marked this task as not done yet:\n" + "\t" + tasks[taskIndex]);
+            task.markAsNotDone();
+            System.out.println("Xenon: Ok, I've marked this task as not done yet:\n" + "\t" + task);
         }
         System.out.println("----------------------------------------------");
     }
@@ -164,7 +164,7 @@ public class Xenon {
             throw new XenonException("Xenon: Task description cannot be empty.");
         }
 
-        tasks[counter] = task;
+        tasks.add(task);
 
         System.out.println("----------------------------------------------");
         System.out.println("Xenon: added " + task);
