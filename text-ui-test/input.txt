@@ -1,10 +1,15 @@
 todo read book
+todo
+help
 todo write essay
 deadline return book /by Sunday
+deadline return book
 event project meeting /from Monday /to Wednesday
-list
+event concert /from Wednesday
+mark
 mark 2
+mark 5
 unmark 2
-mark 3
 list
+random command
 bye

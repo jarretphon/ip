@@ -1,10 +1,32 @@
 ----------------------------------------------
 Hello! I'm Xenon
 What can I do for you?
+Here are the commands you can use:
+- todo <description>                                         -Add a todo task
+- deadline <description> /by <due date>                      -Add a deadline task
+- event <description> /from <start date> /to <end date>      -Add an event
+- list                                                       -Display created tasks
+- mark <task number>                                         -Mark a task as done
+- unmark <task number>                                       -Mark a task as undone
+- bye                                                        -Exit chatbot
 
 ----------------------------------------------
 			You: ----------------------------------------------
 Xenon: added [T][ ] read book
+----------------------------------------------
+			You: ----------------------------------------------
+Xenon: Task description cannot be empty
+If you are unsure of how to use me, type 'help' to see a list of available commands
+----------------------------------------------
+			You: ----------------------------------------------
+Xenon: Here are the commands you can use:
+- todo <description>                                         -Add a todo task
+- deadline <description> /by <due date>                      -Add a deadline task
+- event <description> /from <start date> /to <end date>      -Add an event
+- list                                                       -Display created tasks
+- mark <task number>                                         -Mark a task as done
+- unmark <task number>                                       -Mark a task as undone
+- bye                                                        -Exit chatbot
 ----------------------------------------------
 			You: ----------------------------------------------
 Xenon: added [T][ ] write essay
@@ -13,7 +35,31 @@ Xenon: added [T][ ] write essay
 Xenon: added [D][ ] return book  (by: Sunday)
 ----------------------------------------------
 			You: ----------------------------------------------
+Xenon: You must specify a due date for a deadline task
+If you are unsure of how to use me, type 'help' to see a list of available commands
+----------------------------------------------
+			You: ----------------------------------------------
 Xenon: added [E][ ] project meeting (from: Monday to: Wednesday)
+----------------------------------------------
+			You: ----------------------------------------------
+Xenon: You must specify both the start and end date for an event
+If you are unsure of how to use me, type 'help' to see a list of available commands
+----------------------------------------------
+			You: ----------------------------------------------
+Xenon: Please specify the task number to mark/unmark
+If you are unsure of how to use me, type 'help' to see a list of available commands
+----------------------------------------------
+			You: ----------------------------------------------
+Xenon: Nice! I've marked this task as done:
+	[T][X] write essay
+----------------------------------------------
+			You: ----------------------------------------------
+Xenon: Task 5 does not exist in your list
+If you are unsure of how to use me, type 'help' to see a list of available commands
+----------------------------------------------
+			You: ----------------------------------------------
+Xenon: Ok, I've marked this task as not done yet:
+	[T][ ] write essay
 ----------------------------------------------
 			You: ----------------------------------------------
 Xenon: Here are the tasks in your list
@@ -23,23 +69,16 @@ Xenon: Here are the tasks in your list
 	4. [E][ ] project meeting (from: Monday to: Wednesday)
 ----------------------------------------------
 			You: ----------------------------------------------
-Xenon: Nice! I've marked this task as done:
-	[T][X] write essay
-----------------------------------------------
-			You: ----------------------------------------------
-Xenon: Ok, I've marked this task as not done yet:
-	[T][ ] write essay
-----------------------------------------------
-			You: ----------------------------------------------
-Xenon: Nice! I've marked this task as done:
-	[D][X] return book  (by: Sunday)
-----------------------------------------------
-			You: ----------------------------------------------
-Xenon: Here are the tasks in your list
-	1. [T][ ] read book
-	2. [T][ ] write essay
-	3. [D][X] return book  (by: Sunday)
-	4. [E][ ] project meeting (from: Monday to: Wednesday)
+Xenon: I'm sorry, I do not recognise your command: random
+
+Here are the commands you can use:
+- todo <description>                                         -Add a todo task
+- deadline <description> /by <due date>                      -Add a deadline task
+- event <description> /from <start date> /to <end date>      -Add an event
+- list                                                       -Display created tasks
+- mark <task number>                                         -Mark a task as done
+- unmark <task number>                                       -Mark a task as undone
+- bye                                                        -Exit chatbot
 ----------------------------------------------
 			You: ----------------------------------------------
 Xenon: Bye. Hope to see you again soon!
