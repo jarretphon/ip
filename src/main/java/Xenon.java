@@ -18,8 +18,7 @@ public class Xenon {
 
     public static void greet() {
         System.out.println("----------------------------------------------");
-        System.out.println("Hello! I'm Xenon");
-        System.out.println("What can I do for you?");
+        System.out.println("Hello! I'm Xenon\n" + "What can I do for you?\n" + HELP_TEXT);
         System.out.println();
         System.out.println("----------------------------------------------");
     }
@@ -47,6 +46,13 @@ public class Xenon {
             // Exit chatbot
             if (inputTokens.length == 1 && command.equals("bye")) {
                 break;
+            }
+
+            if (inputTokens.length == 1 && command.equals("help")) {
+                System.out.println("----------------------------------------------");
+                System.out.println("Xenon: " + HELP_TEXT);
+                System.out.println("----------------------------------------------");
+                continue;
             }
 
             try {
@@ -77,6 +83,7 @@ public class Xenon {
             } catch (XenonException error) {
                 System.out.println("----------------------------------------------");
                 System.out.println(error);
+                System.out.println("If you are unsure of how to use me, type 'help' to see a list of available commands");
                 System.out.println("----------------------------------------------");
             }
         }
