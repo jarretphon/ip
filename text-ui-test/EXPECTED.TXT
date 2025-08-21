@@ -1,15 +1,18 @@
 ----------------------------------------------
 Hello! I'm Xenon
 What can I do for you?
+
 Here are the commands you can use:
-- todo <description>                                         -Add a todo task
-- deadline <description> /by <due date>                      -Add a deadline task
-- event <description> /from <start date> /to <end date>      -Add an event
-- list                                                       -Display created tasks
-- mark <task number>                                         -Mark a task as done
-- unmark <task number>                                       -Mark a task as undone
-- delete <task number>                                       -Delete a task
-- bye                                                        -Exit chatbot
+- todo <description>                                           - Add a todo task
+- deadline <description> /by <due date>                        - Add a deadline task
+- event <description> /from <start date> /to <end date>        - Add an event
+- list                                                         - Display created tasks
+- mark <task number>                                           - Mark a task as done
+- unmark <task number>                                         - Mark a task as undone
+- delete <task number>                                         - Delete a task
+- help                                                         - Displays a list of available commands
+- bye                                                          - Exit chatbot
+
 
 ----------------------------------------------
 			You: ----------------------------------------------
@@ -21,14 +24,16 @@ If you are unsure of how to use me, type 'help' to see a list of available comma
 ----------------------------------------------
 			You: ----------------------------------------------
 Xenon: Here are the commands you can use:
-- todo <description>                                         -Add a todo task
-- deadline <description> /by <due date>                      -Add a deadline task
-- event <description> /from <start date> /to <end date>      -Add an event
-- list                                                       -Display created tasks
-- mark <task number>                                         -Mark a task as done
-- unmark <task number>                                       -Mark a task as undone
-- delete <task number>                                       -Delete a task
-- bye                                                        -Exit chatbot
+- todo <description>                                           - Add a todo task
+- deadline <description> /by <due date>                        - Add a deadline task
+- event <description> /from <start date> /to <end date>        - Add an event
+- list                                                         - Display created tasks
+- mark <task number>                                           - Mark a task as done
+- unmark <task number>                                         - Mark a task as undone
+- delete <task number>                                         - Delete a task
+- help                                                         - Displays a list of available commands
+- bye                                                          - Exit chatbot
+
 ----------------------------------------------
 			You: ----------------------------------------------
 Xenon: added [T][ ] write essay
@@ -81,14 +86,16 @@ Xenon: Here are the tasks in your list
 Xenon: I'm sorry, I do not recognise your command: random
 
 Here are the commands you can use:
-- todo <description>                                         -Add a todo task
-- deadline <description> /by <due date>                      -Add a deadline task
-- event <description> /from <start date> /to <end date>      -Add an event
-- list                                                       -Display created tasks
-- mark <task number>                                         -Mark a task as done
-- unmark <task number>                                       -Mark a task as undone
-- delete <task number>                                       -Delete a task
-- bye                                                        -Exit chatbot
+- todo <description>                                           - Add a todo task
+- deadline <description> /by <due date>                        - Add a deadline task
+- event <description> /from <start date> /to <end date>        - Add an event
+- list                                                         - Display created tasks
+- mark <task number>                                           - Mark a task as done
+- unmark <task number>                                         - Mark a task as undone
+- delete <task number>                                         - Delete a task
+- help                                                         - Displays a list of available commands
+- bye                                                          - Exit chatbot
+
 ----------------------------------------------
 			You: ----------------------------------------------
 Xenon: Bye. Hope to see you again soon!
