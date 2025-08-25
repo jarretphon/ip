@@ -1,9 +1,22 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
 
 public class Xenon {
 
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
+    private final String FILE_PATH = "./data.txt";
+
+    public Xenon() {
+        try {
+            this.tasks = loadData(FILE_PATH);
+        } catch (IOException e) {
+            System.out.println("Unable to load data");
+        }
+    }
 
     public static void greet() {
         System.out.println("----------------------------------------------");
@@ -115,6 +128,12 @@ public class Xenon {
             System.out.println("Xenon: Ok, I've marked this task as not done yet:\n" + "\t" + task);
         }
         System.out.println("----------------------------------------------");
+
+        try {
+            saveData(tasks, FILE_PATH);
+        } catch (IOException e) {
+            System.out.println("Unable to save data");
+        }
     }
 
     public void createTask(String command, String contents) throws XenonException {
@@ -154,6 +173,11 @@ public class Xenon {
         }
 
         tasks.add(task);
+        try {
+            saveData(tasks, FILE_PATH);
+        } catch (IOException e) {
+            System.out.println("Unable to save data");
+        }
 
         System.out.println("----------------------------------------------");
         System.out.println("Xenon: added " + task);
@@ -182,8 +206,44 @@ public class Xenon {
         Task deletedTask = tasks.get(taskIndex);
         tasks.remove(taskIndex);
 
+        try {
+            saveData(tasks, FILE_PATH);
+        } catch (IOException e) {
+            System.out.println("Unable to save data");
+        }
+
         System.out.println("----------------------------------------------");
         System.out.println("Xenon: Noted. I've removed this task\n" + "\t" + deletedTask);
         System.out.println("----------------------------------------------");
+    }
+
+    public ArrayList<Task> loadData(String filePath) throws IOException {
+        File file = new File(filePath);
+        ArrayList<Task> tasks = new ArrayList<>();
+        Scanner s;
+
+        try {
+            s = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            file.createNewFile();
+            return tasks;
+        }
+
+        // Read the data from file into memory
+        while (s.hasNext()) {
+            String savedTask = s.nextLine();
+            Task task = Task.fromStorageString(savedTask);
+            tasks.add(task);
+        }
+
+        return tasks;
+    }
+
+    public void saveData(ArrayList<Task> tasks, String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (Task t : tasks) {
+            fw.write(t.toStorageString() + "\n");
+        }
+        fw.close();
     }
 }
