@@ -23,6 +23,37 @@ public class Task {
         }
     }
 
+    public String toStorageString() {
+        String completionStatus = this.isDone ? "1" : "0";
+        return completionStatus + " | " + this.description;
+    }
+
+    public static Task fromStorageString(String storageString) {
+        // split by "|" and remove leading or trailing white spaces
+        String[] tokens = storageString.split("\\s*\\|\\s*");
+        String type = tokens[0];
+        String completionStatus = tokens[1];
+        String contents = tokens[2];
+
+        Task task;
+
+        // Create appropriate task for each task Type
+        if (type.equals("T")) {
+            task = new ToDoTask(contents);
+        } else if (type.equals("D")) {
+            String deadline = tokens.length > 3 ? tokens[3] : "";
+            task = new DeadlineTask(contents, deadline);
+        } else {
+            String startDate = tokens.length > 4 ? tokens[3] : "";
+            String endDate = tokens.length > 4 ? tokens[4] : "";
+            task = new Event(contents, startDate, endDate);
+        }
+
+        if (completionStatus.equals("1")) task.markAsDone();
+
+        return task;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
