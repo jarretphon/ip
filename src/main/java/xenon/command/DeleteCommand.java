@@ -1,6 +1,13 @@
-import java.io.IOException;
+package xenon.command;
 
-public class DeleteCommand extends Command{
+import java.io.IOException;
+import xenon.storage.Storage;
+import xenon.tasklist.TaskList;
+import xenon.ui.Ui;
+import xenon.exception.XenonException;
+import xenon.task.Task;
+
+public class DeleteCommand extends Command {
 
     private int taskNumber;
 
@@ -10,7 +17,7 @@ public class DeleteCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws XenonException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws XenonException {
         int taskIndex = this.taskNumber - 1;
         Task deletedTask = tasks.delete(taskIndex);
 

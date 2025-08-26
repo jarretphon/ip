@@ -1,3 +1,5 @@
+package xenon.exception;
+
 public class XenonException extends Exception {
 
     public XenonException(String message) {

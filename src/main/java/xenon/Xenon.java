@@ -1,4 +1,13 @@
+package xenon;
+
 import java.io.IOException;
+
+import xenon.command.Command;
+import xenon.exception.XenonException;
+import xenon.parser.Parser;
+import xenon.storage.Storage;
+import xenon.tasklist.TaskList;
+import xenon.ui.Ui;
 
 public class Xenon {
 

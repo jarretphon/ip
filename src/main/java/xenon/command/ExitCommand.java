@@ -1,4 +1,9 @@
-public class ExitCommand extends Command{
+package xenon.command;
+import xenon.storage.Storage;
+import xenon.tasklist.TaskList;
+import xenon.ui.Ui;
+
+public class ExitCommand extends Command {
 
     public ExitCommand() {
         super(true);

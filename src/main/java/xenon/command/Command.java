@@ -1,3 +1,10 @@
+package xenon.command;
+
+import xenon.storage.Storage;
+import xenon.tasklist.TaskList;
+import xenon.ui.Ui;
+import xenon.exception.XenonException;
+
 public abstract class Command {
 
     private boolean isExit;

@@ -1,6 +1,7 @@
+package xenon.task;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import xenon.exception.XenonException;
 
 public class Task {
     protected String description;
@@ -32,7 +33,7 @@ public class Task {
         return completionStatus + " | " + this.description;
     }
 
-    public static Task fromStorageString(String storageString) throws XenonException{
+    public static Task fromStorageString(String storageString) throws XenonException {
         // split by "|" and remove leading or trailing white spaces
         String[] tokens = storageString.split("\\s*\\|\\s*");
         String type = tokens[0];

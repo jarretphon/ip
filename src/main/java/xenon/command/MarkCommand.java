@@ -1,10 +1,17 @@
-import java.io.IOException;
+package xenon.command;
 
-public class UnmarkCommand extends Command {
+import java.io.IOException;
+import xenon.storage.Storage;
+import xenon.tasklist.TaskList;
+import xenon.ui.Ui;
+import xenon.exception.XenonException;
+import xenon.task.Task;
+
+public class MarkCommand extends Command {
 
     private int taskNumber;
 
-    public UnmarkCommand(int taskNumber) {
+    public MarkCommand(int taskNumber) {
         super(false);
         this.taskNumber = taskNumber;
     }
@@ -12,8 +19,8 @@ public class UnmarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws XenonException {
         int taskIndex = this.taskNumber - 1;
-        Task unmarkedTask = tasks.markAsNotDone(taskIndex);
-        ui.showResponse("Ok, I've marked this task as not done yet:\n" + "\t" + unmarkedTask);
+        Task markedTask = tasks.markAsDone(taskIndex);
+        ui.showResponse("Nice! I've marked this task as done:\n" + "\t" + markedTask);
 
         try {
             storage.saveData(tasks.getAll());
@@ -22,4 +29,3 @@ public class UnmarkCommand extends Command {
         }
     }
 }
-

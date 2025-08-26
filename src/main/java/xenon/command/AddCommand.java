@@ -1,5 +1,15 @@
+package xenon.command;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
+import xenon.storage.Storage;
+import xenon.tasklist.TaskList;
+import xenon.ui.Ui;
+import xenon.exception.XenonException;
+import xenon.task.Task;
+import xenon.task.ToDoTask;
+import xenon.task.DeadlineTask;
+import xenon.task.Event;
 
 public class AddCommand extends Command {
 
@@ -27,7 +37,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws XenonException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws XenonException {
 
         if (this.description.isBlank()) {
             throw new XenonException("Task description cannot be empty");

@@ -1,3 +1,5 @@
+package xenon;
+
 public enum Operation {
     TODO("todo", "todo <description>", "Add a todo task"),
     DEADLINE("deadline", "deadline <description> /by <due date>", "Add a deadline task"),
