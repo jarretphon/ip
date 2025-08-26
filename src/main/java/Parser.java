@@ -4,7 +4,7 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    public static String[] parse(String input) throws XenonException {
+    public static Command parse(String input) throws XenonException {
         if (input.isBlank()) {
             throw new XenonException("Input cannot be empty");
         }
@@ -14,7 +14,42 @@ public class Parser {
         String command = tokens[0];
         String contents = tokens.length < 2 ? "" : tokens[1];
 
-        return new String[] {command, contents};
+        Operation op = Operation.fromInput(command);
+
+        if (op == null) {
+            throw new XenonException("I'm sorry, I do not recognise your command: " + input
+                    + "\n\n" + Operation.usageGuide());
+        }
+
+        switch (op) {
+        case BYE:
+           return new ExitCommand();
+        case HELP:
+            return new HelpCommand();
+        case LIST:
+            return new ListCommand();
+        case TODO:
+            return new AddCommand(contents);
+        case DEADLINE:
+            String[] taskArgs = parseDeadline(contents);
+            String taskDescription = taskArgs[0];
+            LocalDateTime deadline = parseDateTime(taskArgs[1]);
+            return new AddCommand(taskDescription, deadline);
+        case EVENT:
+            String[] eventArgs = parseEvent(contents);
+            String eventDescription = eventArgs[0];
+            LocalDateTime startDate = parseDateTime(eventArgs[1]);
+            LocalDateTime endDate = parseDateTime(eventArgs[2]);
+            return new AddCommand(eventDescription, startDate, endDate);
+        case MARK:
+            return new MarkCommand(parseTaskNumber(contents));
+        case UNMARK:
+            return new UnmarkCommand(parseTaskNumber(contents));
+        case DELETE:
+            return new DeleteCommand(parseTaskNumber(contents));
+        }
+
+        throw new XenonException("Unable to parse input");
     }
 
     public static String[] parseDeadline(String taskContents) throws XenonException {
