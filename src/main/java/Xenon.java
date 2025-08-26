@@ -1,9 +1,12 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Xenon {
 
@@ -150,19 +153,19 @@ public class Xenon {
         } else if (command.equals("deadline")) {
             String[] tokens = contents.split("/by", 2);
             description = tokens[0];
-            String deadline = tokens.length > 1 ? tokens[1].trim() : "";
+            LocalDateTime deadline = tokens.length > 1 ? parseDateTime(tokens[1].trim()) : null;
 
-            if (deadline.isBlank())
+            if (deadline == null)
                 throw new XenonException("Xenon: You must specify a due date for a deadline task");
 
             task = new DeadlineTask(description, deadline);
         } else {
             String[] tokens = contents.split("/from|/to", 3);
             description = tokens[0];
-            String startDate = tokens.length > 2 ? tokens[1].trim() : "";
-            String endDate = tokens.length > 2 ? tokens[2].trim() : "";
+            LocalDateTime startDate = tokens.length > 2 ? parseDateTime(tokens[1].trim()) : null;
+            LocalDateTime endDate = tokens.length > 2 ? parseDateTime(tokens[2].trim()) : null;
 
-            if (startDate.isBlank() || endDate.isBlank())
+            if (startDate == null || endDate == null)
                 throw new XenonException("Xenon: You must specify both the start and end date for an event");
 
             task = new Event(description, startDate, endDate);
@@ -245,5 +248,19 @@ public class Xenon {
             fw.write(t.toStorageString() + "\n");
         }
         fw.close();
+    }
+
+    public LocalDateTime parseDateTime(String dateTimeInput) throws XenonException{
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(dateTimeInput, inputFormatter);
+            return dateTime;
+        } catch (DateTimeParseException e) {
+            throw new XenonException(
+                    "Xenon: Invalid date input. Please specify a date with the following format: dd/MM/yyyy HH:mm "
+                    + "E.g. 27/08/2025 09:30"
+            );
+        }
     }
 }
