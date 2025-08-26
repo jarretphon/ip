@@ -14,8 +14,10 @@ public class Xenon {
     //private ArrayList<Task> tasks;
     private TaskList tasks;
     private Storage storage;
+    private UI ui;
 
     public Xenon(String filePath) {
+        ui = new UI();
         storage = new Storage(filePath);
         try {
             this.tasks = new TaskList(storage.loadData(filePath));
@@ -24,29 +26,14 @@ public class Xenon {
         }
     }
 
-    public static void greet() {
-        System.out.println("----------------------------------------------");
-        System.out.println("Hello! I'm Xenon\n" + "What can I do for you?\n\n" + Command.usageGuide());
-        System.out.println();
-        System.out.println("----------------------------------------------");
-    }
-
-    public static void exit() {
-        System.out.println("----------------------------------------------");
-        System.out.println("Xenon: Bye. Hope to see you again soon!");
-        System.out.println();
-        System.out.println("----------------------------------------------");
-    }
-
     public void chat() {
-        Scanner scanner = new Scanner(System.in);
-        String input;
+        ui.showWelcome();
+        boolean isExit = false;
 
-        while(true) {
-            System.out.print("\t\t\tYou: ");
-            input = scanner.nextLine();
-
+        while(!isExit) {
             try {
+                String input = ui.takeInput();
+
                 String[] tokens = Parser.parse(input);
                 String command = tokens[0];
                 String contents = tokens[1];
@@ -54,26 +41,21 @@ public class Xenon {
                 Command cmd = Command.fromInput(command);
 
                 if (cmd == null) {
-                    System.out.println("----------------------------------------------");
-                    System.out.println(
-                            "Xenon: I'm sorry, I do not recognise your command: "
-                            + input + "\n\n"
-                            + Command.usageGuide()
-                    );
-                    System.out.println("----------------------------------------------");
+                    ui.showResponse("I'm sorry, I do not recognise your command: "
+                            + input + "\n\n" + Command.usageGuide());
                     continue;
                 }
 
                 switch (cmd) {
                 case BYE:
-                    return;
+                    ui.showGoodBye();
+                    isExit = true;
+                    break;
                 case HELP:
-                    System.out.println("----------------------------------------------");
-                    System.out.println("Xenon: " + Command.usageGuide());
-                    System.out.println("----------------------------------------------");
+                    ui.showResponse(Command.usageGuide());
                     break;
                 case LIST:
-                    displayTasks();
+                    ui.showResponse("Here are the tasks in your list\n" + tasks);
                     break;
                 case TODO: case DEADLINE: case EVENT:
                     createTask(cmd.getKeyword(), contents);
@@ -86,33 +68,23 @@ public class Xenon {
                     break;
                 }
             } catch (XenonException error) {
-                System.out.println("----------------------------------------------");
-                System.out.println(error);
-                System.out.println("If you are unsure of how to use me, type 'help' to see a list of available commands");
-                System.out.println("----------------------------------------------");
+                ui.showResponse(error
+                        + "\n If you are unsure of how to use me, type 'help' to see a list of available commands");
             }
         }
-    }
-
-    public void displayTasks() {
-        System.out.println("----------------------------------------------");
-        System.out.println("Xenon: Here are the tasks in your list\n" + tasks);
-        System.out.println("----------------------------------------------");
     }
 
     public void toggleComplete(String command, String taskId) throws XenonException{
 
         int taskIndex = Parser.parseTaskNumber(taskId) - 1;
 
-        System.out.println("----------------------------------------------");
         if (command.equals("mark")) {
             Task markedTask = tasks.markAsDone(taskIndex);
-            System.out.println("Xenon: Nice! I've marked this task as done:\n" + "\t" + markedTask);
+            ui.showResponse("Nice! I've marked this task as done:\n" + "\t" + markedTask);
         } else if (command.equals("unmark")) {
             Task unmarkedTask = tasks.markAsNotDone(taskIndex);
-            System.out.println("Xenon: Ok, I've marked this task as not done yet:\n" + "\t" + unmarkedTask);
+            ui.showResponse("Ok, I've marked this task as not done yet:\n" + "\t" + unmarkedTask);
         }
-        System.out.println("----------------------------------------------");
 
         try {
             storage.saveData(tasks.getAll());
@@ -123,7 +95,7 @@ public class Xenon {
 
     public void createTask(String command, String contents) throws XenonException {
         if (contents.isBlank()) {
-            throw new XenonException("Xenon: Task description cannot be empty");
+            throw new XenonException("Task description cannot be empty");
         };
 
         String description;
@@ -146,7 +118,7 @@ public class Xenon {
         }
 
         if (description.isBlank()) {
-            throw new XenonException("Xenon: Task description cannot be empty.");
+            throw new XenonException("Task description cannot be empty.");
         }
 
         tasks.add(task);
@@ -156,9 +128,7 @@ public class Xenon {
             System.out.println("Unable to save data");
         }
 
-        System.out.println("----------------------------------------------");
-        System.out.println("Xenon: added " + task);
-        System.out.println("----------------------------------------------");
+        ui.showResponse("added " + task);
     }
 
     public void deleteTask(String taskId) throws XenonException {
@@ -172,8 +142,6 @@ public class Xenon {
             System.out.println("Unable to save data");
         }
 
-        System.out.println("----------------------------------------------");
-        System.out.println("Xenon: Noted. I've removed this task\n" + "\t" + deletedTask);
-        System.out.println("----------------------------------------------");
+        ui.showResponse("Noted. I've removed this task\n" + "\t" + deletedTask);
     }
 }
