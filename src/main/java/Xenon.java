@@ -12,11 +12,12 @@ import java.time.format.DateTimeFormatter;
 public class Xenon {
 
     private ArrayList<Task> tasks;
-    private final String FILE_PATH = "./data.txt";
+    private Storage storage;
 
-    public Xenon() {
+    public Xenon(String filePath) {
+        storage = new Storage(filePath);
         try {
-            this.tasks = loadData(FILE_PATH);
+            this.tasks = storage.loadData(filePath);
         } catch (IOException e) {
             System.out.println("Unable to load data");
         }
@@ -134,7 +135,7 @@ public class Xenon {
         System.out.println("----------------------------------------------");
 
         try {
-            saveData(tasks, FILE_PATH);
+            storage.saveData(tasks);
         } catch (IOException e) {
             System.out.println("Unable to save data");
         }
@@ -178,7 +179,7 @@ public class Xenon {
 
         tasks.add(task);
         try {
-            saveData(tasks, FILE_PATH);
+            storage.saveData(tasks);
         } catch (IOException e) {
             System.out.println("Unable to save data");
         }
@@ -211,7 +212,7 @@ public class Xenon {
         tasks.remove(taskIndex);
 
         try {
-            saveData(tasks, FILE_PATH);
+            storage.saveData(tasks);
         } catch (IOException e) {
             System.out.println("Unable to save data");
         }
@@ -219,41 +220,6 @@ public class Xenon {
         System.out.println("----------------------------------------------");
         System.out.println("Xenon: Noted. I've removed this task\n" + "\t" + deletedTask);
         System.out.println("----------------------------------------------");
-    }
-
-    public ArrayList<Task> loadData(String filePath) throws IOException {
-        File file = new File(filePath);
-        ArrayList<Task> tasks = new ArrayList<>();
-        Scanner s;
-
-        try {
-            s = new Scanner(file);
-        } catch (FileNotFoundException e1) {
-            file.createNewFile();
-            return tasks;
-        }
-
-        // Read the data from file into memory
-        while (s.hasNext()) {
-            String savedTask = s.nextLine();
-            try {
-                Task task = Task.fromStorageString(savedTask);
-                tasks.add(task);
-            } catch (XenonException e) {
-                System.out.println("Xenon: Task could not be loaded: " + savedTask);
-                System.out.println("----------------------------------------------");
-            }
-        }
-
-        return tasks;
-    }
-
-    public void saveData(ArrayList<Task> tasks, String filePath) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        for (Task t : tasks) {
-            fw.write(t.toStorageString() + "\n");
-        }
-        fw.close();
     }
 
     public LocalDateTime parseDateTime(String dateTimeInput) throws XenonException{
