@@ -39,17 +39,33 @@ Xenon: Here are the commands you can use:
 Xenon: added [T][ ] write essay
 ----------------------------------------------
 			You: ----------------------------------------------
-Xenon: added [D][ ] return book  (by: Sunday)
+Xenon: Invalid date input. Please specify a date with the following format: dd/MM/yyyy HH:mm E.g. 27/08/2025 09:30
+If you are unsure of how to use me, type 'help' to see a list of available commands
 ----------------------------------------------
 			You: ----------------------------------------------
 Xenon: You must specify a due date for a deadline task
 If you are unsure of how to use me, type 'help' to see a list of available commands
 ----------------------------------------------
 			You: ----------------------------------------------
-Xenon: added [E][ ] project meeting (from: Monday to: Wednesday)
+Xenon: added [D][ ] return book  (by: 09:30, 28 Aug 2026)
+----------------------------------------------
+			You: ----------------------------------------------
+Xenon: Deadline cannot be before today.
+If you are unsure of how to use me, type 'help' to see a list of available commands
+----------------------------------------------
+			You: ----------------------------------------------
+Xenon: Invalid date input. Please specify a date with the following format: dd/MM/yyyy HH:mm E.g. 27/08/2025 09:30
+If you are unsure of how to use me, type 'help' to see a list of available commands
 ----------------------------------------------
 			You: ----------------------------------------------
 Xenon: You must specify both the start and end date for an event
+If you are unsure of how to use me, type 'help' to see a list of available commands
+----------------------------------------------
+			You: ----------------------------------------------
+Xenon: added [E][ ] project meeting  (from: 09:30, 28 Aug 2026 to: 09:30, 30 Aug 2026)
+----------------------------------------------
+			You: ----------------------------------------------
+Xenon: Start date must be after end date
 If you are unsure of how to use me, type 'help' to see a list of available commands
 ----------------------------------------------
 			You: ----------------------------------------------
@@ -79,8 +95,8 @@ Xenon: Noted. I've removed this task
 			You: ----------------------------------------------
 Xenon: Here are the tasks in your list
 	1. [T][ ] read book
-	2. [D][ ] return book  (by: Sunday)
-	3. [E][ ] project meeting (from: Monday to: Wednesday)
+	2. [D][ ] return book  (by: 09:30, 28 Aug 2026)
+	3. [E][ ] project meeting  (from: 09:30, 28 Aug 2026 to: 09:30, 30 Aug 2026)
 ----------------------------------------------
 			You: ----------------------------------------------
 Xenon: I'm sorry, I do not recognise your command: random

@@ -1,20 +1,36 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-    private String startDate;
-    private String endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    private final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("HH:mm, dd MMM yyyy");
 
-    public Event(String description, String startDate, String endDate) {
+    public Event(String description, LocalDateTime startDate, LocalDateTime endDate) throws XenonException {
         super(description);
         this.startDate = startDate;
         this.endDate = endDate;
+
+        if (this.startDate.isBefore(LocalDateTime.now()) || this.endDate.isBefore(LocalDateTime.now())) {
+            throw new XenonException("Xenon: Start and end dates cannot be set before today");
+        }
+
+        if (this.endDate.isBefore(this.startDate)) {
+            throw new XenonException("Xenon: Start date must be after end date");
+        }
+
     }
 
     public String toStorageString() {
-        return "E | " + super.toStorageString() + " | " + this.startDate + " | " + this.endDate;
+        // Date strings are in storage with ISO format yyyy-MM-dd HH:mm
+        return "E | " + super.toStorageString() + " | " + this.startDate.toString() + " | " + this.endDate.toString();
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.startDate + " to: " + this.endDate + ")";
+        // Date strings are displayed to the user with custom format dd MMM yyyy HH:mm
+        return "[E]" + super.toString() + " (from: "
+                + this.startDate.format(OUTPUT_FORMATTER) + " to: " + this.endDate.format(OUTPUT_FORMATTER) + ")";
     }
 }

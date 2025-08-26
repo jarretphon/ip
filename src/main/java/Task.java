@@ -1,3 +1,7 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -28,7 +32,7 @@ public class Task {
         return completionStatus + " | " + this.description;
     }
 
-    public static Task fromStorageString(String storageString) {
+    public static Task fromStorageString(String storageString) throws XenonException{
         // split by "|" and remove leading or trailing white spaces
         String[] tokens = storageString.split("\\s*\\|\\s*");
         String type = tokens[0];
@@ -41,11 +45,11 @@ public class Task {
         if (type.equals("T")) {
             task = new ToDoTask(contents);
         } else if (type.equals("D")) {
-            String deadline = tokens.length > 3 ? tokens[3] : "";
+            LocalDateTime deadline = tokens.length > 3 ? LocalDateTime.parse(tokens[3]) : null;
             task = new DeadlineTask(contents, deadline);
         } else {
-            String startDate = tokens.length > 4 ? tokens[3] : "";
-            String endDate = tokens.length > 4 ? tokens[4] : "";
+            LocalDateTime startDate = tokens.length > 4 ? LocalDateTime.parse(tokens[3]) : null;
+            LocalDateTime endDate = tokens.length > 4 ? LocalDateTime.parse(tokens[4]) : null;
             task = new Event(contents, startDate, endDate);
         }
 

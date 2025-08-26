@@ -4,8 +4,12 @@ help
 todo write essay
 deadline return book /by Sunday
 deadline return book
+deadline return book /by 28/08/2026 09:30
+deadline buy groceries /by 25/08/2024 09:30
 event project meeting /from Monday /to Wednesday
 event concert /from Wednesday
+event project meeting /from 28/08/2026 09:30 /to 30/08/2026 09:30
+event project meeting /from 30/08/2026 09:30 /to 28/08/2026 09:30
 mark
 mark 2
 mark 5
