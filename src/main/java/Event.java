@@ -7,10 +7,19 @@ public class Event extends Task {
     private LocalDateTime endDate;
     private final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("HH:mm, dd MMM yyyy");
 
-    public Event(String description, LocalDateTime startDate, LocalDateTime endDate) {
+    public Event(String description, LocalDateTime startDate, LocalDateTime endDate) throws XenonException {
         super(description);
         this.startDate = startDate;
         this.endDate = endDate;
+
+        if (this.startDate.isBefore(LocalDateTime.now()) || this.endDate.isBefore(LocalDateTime.now())) {
+            throw new XenonException("Xenon: Start and end dates cannot be set before today");
+        }
+
+        if (this.endDate.isBefore(this.startDate)) {
+            throw new XenonException("Xenon: Start date must be after end date");
+        }
+
     }
 
     public String toStorageString() {

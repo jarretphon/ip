@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.sql.SQLOutput;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -227,7 +228,7 @@ public class Xenon {
 
         try {
             s = new Scanner(file);
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e1) {
             file.createNewFile();
             return tasks;
         }
@@ -235,8 +236,13 @@ public class Xenon {
         // Read the data from file into memory
         while (s.hasNext()) {
             String savedTask = s.nextLine();
-            Task task = Task.fromStorageString(savedTask);
-            tasks.add(task);
+            try {
+                Task task = Task.fromStorageString(savedTask);
+                tasks.add(task);
+            } catch (XenonException e) {
+                System.out.println("Xenon: Task could not be loaded: " + savedTask);
+                System.out.println("----------------------------------------------");
+            }
         }
 
         return tasks;

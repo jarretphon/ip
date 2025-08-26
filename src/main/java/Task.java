@@ -32,7 +32,7 @@ public class Task {
         return completionStatus + " | " + this.description;
     }
 
-    public static Task fromStorageString(String storageString) {
+    public static Task fromStorageString(String storageString) throws XenonException{
         // split by "|" and remove leading or trailing white spaces
         String[] tokens = storageString.split("\\s*\\|\\s*");
         String type = tokens[0];

@@ -4,12 +4,16 @@ import java.time.format.DateTimeFormatter;
 public class DeadlineTask extends Task{
 
     private LocalDateTime deadline;
-    private final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("HH:mm, dd MMM yyyy ");
+    private final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("HH:mm, dd MMM yyyy");
 
 
-    public DeadlineTask(String description, LocalDateTime deadline) {
+    public DeadlineTask(String description, LocalDateTime deadline) throws XenonException {
         super(description);
         this.deadline = deadline;
+
+        if (this.deadline.isBefore(LocalDateTime.now())) {
+            throw new XenonException("Xenon: Deadline cannot be before today.");
+        }
     }
 
     @Override
