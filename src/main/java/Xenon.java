@@ -11,13 +11,14 @@ import java.time.format.DateTimeFormatter;
 
 public class Xenon {
 
-    private ArrayList<Task> tasks;
+    //private ArrayList<Task> tasks;
+    private TaskList tasks;
     private Storage storage;
 
     public Xenon(String filePath) {
         storage = new Storage(filePath);
         try {
-            this.tasks = storage.loadData(filePath);
+            this.tasks = new TaskList(storage.loadData(filePath));
         } catch (IOException e) {
             System.out.println("Unable to load data");
         }
@@ -95,10 +96,7 @@ public class Xenon {
 
     public void displayTasks() {
         System.out.println("----------------------------------------------");
-        System.out.println("Xenon: Here are the tasks in your list");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("\t" + (i + 1) + ". " + tasks.get(i));
-        }
+        System.out.println("Xenon: Here are the tasks in your list\n" + tasks);
         System.out.println("----------------------------------------------");
     }
 
@@ -106,25 +104,18 @@ public class Xenon {
 
         int taskIndex = Parser.parseTaskNumber(taskId) - 1;
 
-        // Ensure that the taskIndex is within the range of available tasks
-        if (taskIndex < 0 || taskIndex > tasks.size() - 1) {;
-            throw new XenonException("Xenon: Task " + (taskIndex + 1) + " does not exist in your list");
-        }
-
-        Task task = tasks.get(taskIndex);
-
         System.out.println("----------------------------------------------");
         if (command.equals("mark")) {
-            task.markAsDone();
-            System.out.println("Xenon: Nice! I've marked this task as done:\n" + "\t" + task);
+            Task markedTask = tasks.markAsDone(taskIndex);
+            System.out.println("Xenon: Nice! I've marked this task as done:\n" + "\t" + markedTask);
         } else if (command.equals("unmark")) {
-            task.markAsNotDone();
-            System.out.println("Xenon: Ok, I've marked this task as not done yet:\n" + "\t" + task);
+            Task unmarkedTask = tasks.markAsNotDone(taskIndex);
+            System.out.println("Xenon: Ok, I've marked this task as not done yet:\n" + "\t" + unmarkedTask);
         }
         System.out.println("----------------------------------------------");
 
         try {
-            storage.saveData(tasks);
+            storage.saveData(tasks.getAll());
         } catch (IOException e) {
             System.out.println("Unable to save data");
         }
@@ -160,7 +151,7 @@ public class Xenon {
 
         tasks.add(task);
         try {
-            storage.saveData(tasks);
+            storage.saveData(tasks.getAll());
         } catch (IOException e) {
             System.out.println("Unable to save data");
         }
@@ -173,16 +164,10 @@ public class Xenon {
     public void deleteTask(String taskId) throws XenonException {
         int taskIndex = Parser.parseTaskNumber(taskId) - 1;
 
-        // Ensure that the taskIndex is within the range of available tasks
-        if (taskIndex < 0 || taskIndex > tasks.size() - 1) {;
-            throw new XenonException("Xenon: Task " + (taskIndex + 1) + " does not exist in your list");
-        }
-
-        Task deletedTask = tasks.get(taskIndex);
-        tasks.remove(taskIndex);
+        Task deletedTask = tasks.delete(taskIndex);
 
         try {
-            storage.saveData(tasks);
+            storage.saveData(tasks.getAll());
         } catch (IOException e) {
             System.out.println("Unable to save data");
         }
