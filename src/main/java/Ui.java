@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
-public class UI {
+public class Ui {
 
     private final Scanner scanner;
 
-    public UI() {
+    public Ui() {
         this.scanner = new Scanner(System.in);
     }
 
@@ -14,7 +14,7 @@ public class UI {
 
     public void showWelcome() {
         this.showLine();
-        System.out.println("Hello! I'm Xenon\n" + "What can I do for you?\n\n" + Command.usageGuide());
+        System.out.println("Hello! I'm Xenon\n" + "What can I do for you?\n\n" + Operation.usageGuide());
         System.out.println();
         this.showLine();
     }

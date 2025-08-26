@@ -1,4 +1,4 @@
-public enum Command {
+public enum Operation {
     TODO("todo", "todo <description>", "Add a todo task"),
     DEADLINE("deadline", "deadline <description> /by <due date>", "Add a deadline task"),
     EVENT("event", "event <description> /from <start date> /to <end date>", "Add an event"),
@@ -13,7 +13,7 @@ public enum Command {
     private final String usage;
     private final String description;
 
-    Command(String keyword, String usage, String description) {
+    Operation(String keyword, String usage, String description) {
         this.keyword = keyword;
         this.usage = usage;
         this.description = description;
@@ -23,8 +23,8 @@ public enum Command {
         return this.keyword;
     }
 
-    public static Command fromInput(String input) {
-        for (Command cmd : Command.values()) {
+    public static Operation fromInput(String input) {
+        for (Operation cmd : Operation.values()) {
             if (cmd.keyword.equals(input)) return cmd;
         }
         return null;
@@ -32,7 +32,7 @@ public enum Command {
 
     public static String usageGuide() {
         StringBuilder helpText = new StringBuilder("Here are the commands you can use:\n");
-        for (Command c : Command.values()) {
+        for (Operation c : Operation.values()) {
             helpText.append(String.format("- %-60s - %s%n", c.usage, c.description));
         }
         return helpText.toString();
