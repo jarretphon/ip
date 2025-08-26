@@ -45,12 +45,11 @@ public class Xenon {
             System.out.print("\t\t\tYou: ");
             input = scanner.nextLine();
 
-            // transform user input into an array of strings
-            String[] inputTokens = input.split("\\s+", 2);
-            String command = inputTokens[0];
-            String contents = inputTokens.length > 1 ? inputTokens[1] : "";
-
             try {
+                String[] tokens = Parser.parse(input);
+                String command = tokens[0];
+                String contents = tokens[1];
+
                 Command cmd = Command.fromInput(command);
 
                 if (cmd == null) {
@@ -104,18 +103,8 @@ public class Xenon {
     }
 
     public void toggleComplete(String command, String taskId) throws XenonException{
-        if (taskId.isBlank()) {
-            throw new XenonException("Xenon: Please specify the task number to mark/unmark");
-        }
 
-        int taskIndex;
-
-        // Ensure that the user provided a numerical taskId
-        try {
-            taskIndex = Integer.parseInt(taskId) - 1;
-        } catch (NumberFormatException e) {
-            throw new XenonException("Xenon: " + taskId + " is not a valid task number");
-        }
+        int taskIndex = Parser.parseTaskNumber(taskId) - 1;
 
         // Ensure that the taskIndex is within the range of available tasks
         if (taskIndex < 0 || taskIndex > tasks.size() - 1) {;
@@ -153,23 +142,15 @@ public class Xenon {
             description = contents;
             task = new ToDoTask(contents);
         } else if (command.equals("deadline")) {
-            String[] tokens = contents.split("/by", 2);
+            String[] tokens = Parser.parseDeadline(contents);
             description = tokens[0];
-            LocalDateTime deadline = tokens.length > 1 ? parseDateTime(tokens[1].trim()) : null;
-
-            if (deadline == null)
-                throw new XenonException("Xenon: You must specify a due date for a deadline task");
-
+            LocalDateTime deadline = Parser.parseDateTime(tokens[1]);
             task = new DeadlineTask(description, deadline);
         } else {
-            String[] tokens = contents.split("/from|/to", 3);
+            String[] tokens = Parser.parseEvent(contents);
             description = tokens[0];
-            LocalDateTime startDate = tokens.length > 2 ? parseDateTime(tokens[1].trim()) : null;
-            LocalDateTime endDate = tokens.length > 2 ? parseDateTime(tokens[2].trim()) : null;
-
-            if (startDate == null || endDate == null)
-                throw new XenonException("Xenon: You must specify both the start and end date for an event");
-
+            LocalDateTime startDate = Parser.parseDateTime(tokens[1]);
+            LocalDateTime endDate = Parser.parseDateTime(tokens[2]);
             task = new Event(description, startDate, endDate);
         }
 
@@ -190,18 +171,7 @@ public class Xenon {
     }
 
     public void deleteTask(String taskId) throws XenonException {
-        if (taskId.isBlank()) {
-            throw new XenonException("Xenon: Please specify the task number to delete");
-        }
-
-        int taskIndex;
-
-        // Ensure that the user provided a numerical taskId
-        try {
-            taskIndex = Integer.parseInt(taskId) - 1;
-        } catch (NumberFormatException e) {
-            throw new XenonException("Xenon: " + taskId + " is not a valid task number");
-        }
+        int taskIndex = Parser.parseTaskNumber(taskId) - 1;
 
         // Ensure that the taskIndex is within the range of available tasks
         if (taskIndex < 0 || taskIndex > tasks.size() - 1) {;
@@ -220,19 +190,5 @@ public class Xenon {
         System.out.println("----------------------------------------------");
         System.out.println("Xenon: Noted. I've removed this task\n" + "\t" + deletedTask);
         System.out.println("----------------------------------------------");
-    }
-
-    public LocalDateTime parseDateTime(String dateTimeInput) throws XenonException{
-        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-
-        try {
-            LocalDateTime dateTime = LocalDateTime.parse(dateTimeInput, inputFormatter);
-            return dateTime;
-        } catch (DateTimeParseException e) {
-            throw new XenonException(
-                    "Xenon: Invalid date input. Please specify a date with the following format: dd/MM/yyyy HH:mm "
-                    + "E.g. 27/08/2025 09:30"
-            );
-        }
     }
 }
