@@ -52,7 +52,7 @@ public class Xenon {
                     System.out.println("----------------------------------------------");
                     System.out.println(
                             "Xenon: I'm sorry, I do not recognise your command: "
-                            + command + "\n\n"
+                            + input + "\n\n"
                             + Command.usageGuide()
                     );
                     System.out.println("----------------------------------------------");
