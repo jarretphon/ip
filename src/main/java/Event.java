@@ -13,11 +13,11 @@ public class Event extends Task {
         this.endDate = endDate;
 
         if (this.startDate.isBefore(LocalDateTime.now()) || this.endDate.isBefore(LocalDateTime.now())) {
-            throw new XenonException("Xenon: Start and end dates cannot be set before today");
+            throw new XenonException("Start and end dates cannot be set before today");
         }
 
         if (this.endDate.isBefore(this.startDate)) {
-            throw new XenonException("Xenon: Start date must be after end date");
+            throw new XenonException("Start date must be after end date");
         }
 
     }

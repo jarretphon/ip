@@ -12,7 +12,7 @@ public class DeadlineTask extends Task{
         this.deadline = deadline;
 
         if (this.deadline.isBefore(LocalDateTime.now())) {
-            throw new XenonException("Xenon: Deadline cannot be before today.");
+            throw new XenonException("Deadline cannot be before today.");
         }
     }
 
