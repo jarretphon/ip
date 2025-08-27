@@ -14,7 +14,7 @@ public class TaskTest {
     @Test
     public void fromStorageString_validTodoString_success() throws XenonException {
         Task t = Task.fromStorageString("T | 0 | task 1");
-        assertInstanceOf(ToDoTask.class, t);
+        assertInstanceOf(TodoTask.class, t);
         assertFalse(t.isDone);
         assertEquals("task 1", t.description);
     }

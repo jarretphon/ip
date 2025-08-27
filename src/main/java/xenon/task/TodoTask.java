@@ -1,8 +1,8 @@
 package xenon.task;
 
-public class ToDoTask extends Task {
+public class TodoTask extends Task {
 
-    public ToDoTask(String description) {
+    public TodoTask(String description) {
         super(description);
     }
 
