@@ -1,0 +1,74 @@
+package xenon.task;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import xenon.exception.XenonException;
+
+public class TaskTest {
+
+    @Test
+    public void fromStorageString_validTodoString_success() throws XenonException {
+        Task t = Task.fromStorageString("T | 0 | task 1");
+        assertInstanceOf(ToDoTask.class, t);
+        assertFalse(t.isDone);
+        assertEquals("task 1", t.description);
+    }
+
+    @Test
+    public void fromStorageString_validDeadlineString_success() throws XenonException {
+        Task t = Task.fromStorageString("D | 1 | task 1 | 2025-08-28T09:30");
+        assertInstanceOf(DeadlineTask.class, t);
+        assertTrue(t.isDone);
+        assertEquals("task 1", t.description);
+    }
+
+    @Test
+    public void fromStorageString_validEventString_success() throws XenonException {
+        Task t = Task.fromStorageString("E | 0 | task 1 | 2025-08-28T09:30 | 2025-08-30T08:30");
+        assertInstanceOf(Event.class, t);
+        assertFalse(t.isDone);
+        assertEquals("task 1", t.description);
+    }
+
+    @Test
+    public void fromStorageString_extraWhiteSpaces_success() throws XenonException {
+        Task t = Task.fromStorageString("  E | 0  |  task 1 | 2025-08-28T09:30    | 2025-08-30T08:30");
+        assertInstanceOf(Event.class, t);
+        assertFalse(t.isDone);
+        assertEquals("task 1", t.description);
+    }
+
+    @Test
+    public void fromStorageString_invalidTaskType_exceptionThrown() {
+        try {
+            Task t = Task.fromStorageString("X | 0 | task 1 | 2025-08-28T09:30 | 2025-08-30T08:30");
+        } catch (XenonException e) {
+            assertEquals("X is an invalid task type", e.getMessage());
+        }
+    }
+
+    @Test
+    public void fromStorageString_invalidCompletionStatus_exceptionThrown() {
+        try {
+            Task t = Task.fromStorageString("E | 2 | task 1 | 2025-08-28T09:30 | 2025-08-30T08:30");
+        } catch (XenonException e) {
+            assertEquals("2 is an invalid completion status", e.getMessage());
+        }
+    }
+
+    @Test
+    public void fromStorageString_invalidDateFormat_exceptionThrown() {
+        try {
+            Task t = Task.fromStorageString("E | 0 | task 1 | 2025/08/28T09:30 | 2025-08-30T08:30");
+        } catch (XenonException e) {
+            assertEquals("2025/08/28T09:30 is an invalid date format. Dates should be given in ISO format",
+                    e.getMessage());
+        }
+    }
+
+}
