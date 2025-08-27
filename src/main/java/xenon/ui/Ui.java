@@ -17,7 +17,7 @@ public class Ui {
 
     public void showWelcome() {
         this.showLine();
-        System.out.println("Hello! I'm Xenon\n" + "What can I do for you?\n\n" + Operation.usageGuide());
+        System.out.println("Hello! I'm Xenon\n" + "What can I do for you?\n\n" + Operation.showUsageGuide());
         System.out.println();
         this.showLine();
     }

@@ -31,7 +31,7 @@ public class Parser {
 
         if (op == null) {
             throw new XenonException("I'm sorry, I do not recognise your command: " + input
-                    + "\n\n" + Operation.usageGuide());
+                    + "\n\n" + Operation.showUsageGuide());
         }
 
         switch (op) {

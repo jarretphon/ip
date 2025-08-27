@@ -32,7 +32,7 @@ public enum Operation {
         return null;
     }
 
-    public static String usageGuide() {
+    public static String showUsageGuide() {
         StringBuilder helpText = new StringBuilder("Here are the commands you can use:\n");
         for (Operation c : Operation.values()) {
             helpText.append(String.format("- %-60s - %s%n", c.usage, c.description));
