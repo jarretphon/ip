@@ -37,7 +37,7 @@ public class Storage {
                 Task task = Task.fromStorageString(savedTask);
                 tasks.add(task);
             } catch (XenonException e) {
-                System.out.println("Xenon: Task could not be loaded: " + savedTask);
+                System.out.println("Xenon: Task could not be loaded: " + savedTask + "\n" + e.getMessage());
                 System.out.println("----------------------------------------------");
             }
         }
