@@ -1,5 +1,9 @@
 package xenon;
 
+/**
+ * Represents the operations that can be performed by the chatbot.
+ * Each operation is associated with a keyword, a usage format, and a description.
+ */
 public enum Operation {
     TODO("todo", "todo <description>", "Add a todo task"),
     DEADLINE("deadline", "deadline <description> /by <due date>", "Add a deadline task"),
@@ -25,6 +29,13 @@ public enum Operation {
         return this.keyword;
     }
 
+    /**
+     * Returns the corresponding {@code Operation} matching the input.
+     * If a match is not found, null is returned.
+     *
+     * @param input The input string to match with an operation's keyword.
+     * @return {@code Operation} if a match is found, otherwise null.
+     */
     public static Operation fromInput(String input) {
         for (Operation cmd : Operation.values()) {
             if (cmd.keyword.equals(input)) return cmd;
@@ -32,6 +43,12 @@ public enum Operation {
         return null;
     }
 
+    /**
+     * Returns a usage guide for all available operations.
+     * The guide includes the format and description for each operation.
+     *
+     * @return A string containing the usage guide.
+     */
     public static String usageGuide() {
         StringBuilder helpText = new StringBuilder("Here are the commands you can use:\n");
         for (Operation c : Operation.values()) {
