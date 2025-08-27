@@ -11,6 +11,11 @@ import xenon.task.ToDoTask;
 import xenon.task.DeadlineTask;
 import xenon.task.Event;
 
+/**
+ * Represents a command that creates and adds a new task to the task list.
+ * The task can be one of three types: ToDoTask, Event, or DeadlineTask,
+ * depending on the input parameters provided during construction.
+ */
 public class AddCommand extends Command {
 
     private String description;
@@ -36,6 +41,15 @@ public class AddCommand extends Command {
         this.endDate = endDate;
     }
 
+    /**
+     * Executes the addition of a new task to the task list. The task type can be ToDoTask, Event,
+     * or DeadlineTask, determined based on the provided input parameters. The added task is saved
+     * to storage, and a response message is displayed to the user.
+     *
+     * @inheritDoc
+     *
+     * @throws XenonException If the task description is empty or invalid.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws XenonException {
 
