@@ -66,22 +66,30 @@ public class Parser {
     }
 
     public static String[] parseDeadline(String taskContents) throws XenonException {
-        String[] tokens = taskContents.split("\\s*/by\\s*", 2);
+        String[] tokens = taskContents.split("/by", 2);
 
         // User did not specify deadline
         if (tokens.length < 2) {
             throw new XenonException("You must specify a due date for a deadline task");
         }
 
+        for (int i = 0; i < tokens.length; i++) {
+            tokens[i] = tokens[i].trim();
+        }
+
         return tokens;
     }
 
     public static String[] parseEvent(String taskContents) throws XenonException {
-        String[] tokens = taskContents.split("\\s*/from\\s*|\\s*/to\\s*", 3);
+        String[] tokens = taskContents.split("/from|/to", 3);
 
         // User did not specify start or end date
         if (tokens.length < 3) {
             throw new XenonException("You must specify both the start and end date for an event");
+        }
+
+        for (int i = 0; i < tokens.length; i++) {
+            tokens[i] = tokens[i].trim();
         }
 
         return tokens;

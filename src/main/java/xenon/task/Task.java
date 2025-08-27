@@ -1,6 +1,8 @@
 package xenon.task;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 import xenon.exception.XenonException;
 
 public class Task {
@@ -34,24 +36,41 @@ public class Task {
     }
 
     public static Task fromStorageString(String storageString) throws XenonException {
-        // split by "|" and remove leading or trailing white spaces
-        String[] tokens = storageString.split("\\s*\\|\\s*");
+
+        String[] tokens = storageString.split("\\|");
+
+        // Remove leading and trailing white spaces
+        for (int i = 0; i < tokens.length; i++) {
+            tokens[i] = tokens[i].trim();
+        }
+
         String type = tokens[0];
         String completionStatus = tokens[1];
-        String contents = tokens[2];
+        String description = tokens[2];
+
+        if (!completionStatus.equals("0") && !completionStatus.equals("1")) {
+            throw new XenonException(completionStatus + " is an invalid completion status");
+        }
 
         Task task;
 
-        // Create appropriate task for each task Type
-        if (type.equals("T")) {
-            task = new ToDoTask(contents);
-        } else if (type.equals("D")) {
-            LocalDateTime deadline = tokens.length > 3 ? LocalDateTime.parse(tokens[3]) : null;
-            task = new DeadlineTask(contents, deadline);
-        } else {
-            LocalDateTime startDate = tokens.length > 4 ? LocalDateTime.parse(tokens[3]) : null;
-            LocalDateTime endDate = tokens.length > 4 ? LocalDateTime.parse(tokens[4]) : null;
-            task = new Event(contents, startDate, endDate);
+        try {
+            // Create appropriate task for each task Type
+            if (type.equals("T")) {
+                task = new ToDoTask(description);
+            } else if (type.equals("D")) {
+                LocalDateTime deadline = tokens.length > 3 ? LocalDateTime.parse(tokens[3]) : null;
+                task = new DeadlineTask(description, deadline);
+            } else if (type.equals("E")) {
+                LocalDateTime startDate = tokens.length > 4 ? LocalDateTime.parse(tokens[3]) : null;
+                LocalDateTime endDate = tokens.length > 4 ? LocalDateTime.parse(tokens[4]) : null;
+                task = new Event(description, startDate, endDate);
+            } else {
+                throw new XenonException(type + " is an invalid task type");
+            }
+        } catch (DateTimeParseException e) {
+            throw new XenonException(e.getParsedString()
+                    + " is an invalid date format. Dates should be given in ISO format");
         }
 
         if (completionStatus.equals("1")) task.markAsDone();
