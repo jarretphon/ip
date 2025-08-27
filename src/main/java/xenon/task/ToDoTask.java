@@ -1,11 +1,20 @@
 package xenon.task;
 
+/**
+ * Represents a To-Do task, which is a specific type of task.
+ * This class extends the functionality of the {@code Task} class.
+ */
 public class ToDoTask extends Task {
 
     public ToDoTask(String description) {
         super(description);
     }
 
+    /**
+     * Converts a To-Do task into a string representation suitable for storage.
+     *
+     * @inheritDoc
+     */
     public String toStorageString() {
         return "T | " + super.toStorageString();
     }

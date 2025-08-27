@@ -5,6 +5,10 @@ import java.time.format.DateTimeParseException;
 
 import xenon.exception.XenonException;
 
+/**
+ * Represents a general task. A {@code Task} corresponds to
+ * an item with a description and completion status.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -18,23 +22,50 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     * Marks this task as completed. If the task is not already marked as done,
+     * it updates the completion status to indicate that the task is done.
+     */
     public void markAsDone() {
         if (!this.isDone) {
             this.isDone = true;
         }
     }
 
+    /**
+     * Marks the task as not done by updating its completion status to false.
+     * This method should only modify the state if the task is currently marked as done.
+     */
     public void markAsNotDone() {
         if (this.isDone) {
             this.isDone = false;
         }
     }
 
+    /**
+     * Converts the task into a string representation suitable for storage.
+     *
+     * @return a formatted string representing the task for storage purposes.
+     */
     public String toStorageString() {
         String completionStatus = this.isDone ? "1" : "0";
         return completionStatus + " | " + this.description;
     }
 
+    /**
+     * Constructs a Task object from its string representation used for storage.
+     * <p>
+     * The storage string must be formatted according to the expected structure:
+     * type | completion_status | description | date(s), where type is one of T (ToDoTask),
+     * D (DeadlineTask), or E (Event). Completion status is either 0 (not done) or 1 (done),
+     * and date(s) should be provided in ISO format.
+     *
+     * @param storageString the string representation of the task from storage
+     * @return a <code>Task</code> reconstructed from the storage string
+     * @throws XenonException if the storage string is malformed or contains invalid data,
+     *                        such as unsupported task type, invalid completion status,
+     *                        or improperly formatted date.
+     */
     public static Task fromStorageString(String storageString) throws XenonException {
 
         String[] tokens = storageString.split("\\|");
