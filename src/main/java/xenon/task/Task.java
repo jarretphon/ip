@@ -88,7 +88,7 @@ public class Task {
         try {
             // Create appropriate task for each task Type
             if (type.equals("T")) {
-                task = new ToDoTask(description);
+                task = new TodoTask(description);
             } else if (type.equals("D")) {
                 LocalDateTime deadline = tokens.length > 3 ? LocalDateTime.parse(tokens[3]) : null;
                 task = new DeadlineTask(description, deadline);

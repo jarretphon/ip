@@ -7,7 +7,7 @@ import xenon.tasklist.TaskList;
 import xenon.ui.Ui;
 import xenon.exception.XenonException;
 import xenon.task.Task;
-import xenon.task.ToDoTask;
+import xenon.task.TodoTask;
 import xenon.task.DeadlineTask;
 import xenon.task.Event;
 
@@ -64,7 +64,7 @@ public class AddCommand extends Command {
         } else if (this.startDate != null && this.endDate != null) {
             task = new Event(this.description, this.startDate, this.endDate);
         } else {
-            task = new ToDoTask(this.description);
+            task = new TodoTask(this.description);
         }
 
         tasks.add(task);

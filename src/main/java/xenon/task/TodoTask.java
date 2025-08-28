@@ -4,9 +4,9 @@ package xenon.task;
  * Represents a To-Do task, which is a specific type of task.
  * This class extends the functionality of the {@code Task} class.
  */
-public class ToDoTask extends Task {
+public class TodoTask extends Task {
 
-    public ToDoTask(String description) {
+    public TodoTask(String description) {
         super(description);
     }
 
