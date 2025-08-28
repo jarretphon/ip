@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import xenon.Operation;
+import xenon.command.FindCommand;
 import xenon.exception.XenonException;
 import xenon.command.AddCommand;
 import xenon.command.Command;
@@ -41,6 +42,8 @@ public class Parser {
             return new HelpCommand();
         case LIST:
             return new ListCommand();
+        case FIND:
+            return new FindCommand(contents);
         case TODO:
             return new AddCommand(contents);
         case DEADLINE:

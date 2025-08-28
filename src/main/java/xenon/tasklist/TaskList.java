@@ -59,6 +59,27 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Returns a list of tasks whose descriptions contain the given phrase.
+     * The search is case-insensitive.
+     *
+     * @param phrase the phrase to search for within the task descriptions
+     * @return a new TaskList containing tasks whose descriptions include the phrase
+     */
+    public TaskList findTasksContaining(String phrase) {
+
+        TaskList results = new TaskList(new ArrayList<Task>());
+
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task t = this.tasks.get(i);
+            if(t.containsPhrase(phrase)) {
+                results.add(t);
+            }
+        }
+
+        return results;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

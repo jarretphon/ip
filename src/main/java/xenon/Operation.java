@@ -5,6 +5,7 @@ public enum Operation {
     DEADLINE("deadline", "deadline <description> /by <due date>", "Add a deadline task"),
     EVENT("event", "event <description> /from <start date> /to <end date>", "Add an event"),
     LIST("list", "list", "Display created tasks"),
+    FIND("find", "find <phrase>", "Find a task by searching for a phrase"),
     MARK("mark", "mark <task number>", "Mark a task as done"),
     UNMARK("unmark", "unmark <task number>", "Mark a task as undone"),
     DELETE("delete", "delete <task number>", "Delete a task"),

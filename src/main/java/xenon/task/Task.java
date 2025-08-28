@@ -2,6 +2,8 @@ package xenon.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import xenon.exception.XenonException;
 
@@ -28,6 +30,19 @@ public class Task {
         if (this.isDone) {
             this.isDone = false;
         }
+    }
+
+    /**
+     * Checks if the given phrase is contained within the task's description.
+     * The matching is case-insensitive.
+     *
+     * @param phrase the phrase to search for within the task description
+     * @return true if the phrase is found in the description, false otherwise
+     */
+    public boolean containsPhrase(String phrase) {
+        Pattern pattern = Pattern.compile(phrase.trim(), Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(this.description);
+        return matcher.find();
     }
 
     public String toStorageString() {
