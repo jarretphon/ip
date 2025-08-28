@@ -7,6 +7,7 @@ Here are the commands you can use:
 - deadline <description> /by <due date>                        - Add a deadline task
 - event <description> /from <start date> /to <end date>        - Add an event
 - list                                                         - Display created tasks
+- find <phrase>                                                - Find a task by searching for a phrase
 - mark <task number>                                           - Mark a task as done
 - unmark <task number>                                         - Mark a task as undone
 - delete <task number>                                         - Delete a task
@@ -28,6 +29,7 @@ Xenon: Here are the commands you can use:
 - deadline <description> /by <due date>                        - Add a deadline task
 - event <description> /from <start date> /to <end date>        - Add an event
 - list                                                         - Display created tasks
+- find <phrase>                                                - Find a task by searching for a phrase
 - mark <task number>                                           - Mark a task as done
 - unmark <task number>                                         - Mark a task as undone
 - delete <task number>                                         - Delete a task
@@ -69,6 +71,18 @@ Xenon: Start date must be after end date
 If you are unsure of how to use me, type 'help' to see a list of available commands
 ____________________________________________________________________________________________________
 					You: ____________________________________________________________________________________________________
+Xenon: Include a word/phrase to search for
+If you are unsure of how to use me, type 'help' to see a list of available commands
+____________________________________________________________________________________________________
+					You: ____________________________________________________________________________________________________
+Xenon: Here are the matching tasks in your list
+	1. [T][ ] read book
+	2. [D][ ] return book (by: 09:30, 28 Aug 2026)
+____________________________________________________________________________________________________
+					You: ____________________________________________________________________________________________________
+Xenon: No matching tasks in your list
+____________________________________________________________________________________________________
+					You: ____________________________________________________________________________________________________
 Xenon: Please specify a task number.
 If you are unsure of how to use me, type 'help' to see a list of available commands
 ____________________________________________________________________________________________________
@@ -106,6 +120,7 @@ Here are the commands you can use:
 - deadline <description> /by <due date>                        - Add a deadline task
 - event <description> /from <start date> /to <end date>        - Add an event
 - list                                                         - Display created tasks
+- find <phrase>                                                - Find a task by searching for a phrase
 - mark <task number>                                           - Mark a task as done
 - unmark <task number>                                         - Mark a task as undone
 - delete <task number>                                         - Delete a task
