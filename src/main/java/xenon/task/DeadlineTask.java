@@ -4,6 +4,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import xenon.exception.XenonException;
 
+/**
+ * Represents a task with a specific deadline, which is a specific type of task.
+ * A {@code DeadlineTask} corresponds to a task that needs to be completed
+ * by a specific date and time.
+ */
 public class DeadlineTask extends Task {
 
     private LocalDateTime deadline;
@@ -19,6 +24,11 @@ public class DeadlineTask extends Task {
         }
     }
 
+    /**
+     * Converts the deadline task into a string representation suitable for storage.
+     *
+     * @inheritDoc
+     */
     @Override
     public String toStorageString() {
         // Date strings are in storage with ISO format yyyy-MM-dd HH:mm

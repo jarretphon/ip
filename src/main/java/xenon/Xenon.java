@@ -9,6 +9,9 @@ import xenon.storage.Storage;
 import xenon.tasklist.TaskList;
 import xenon.ui.Ui;
 
+/**
+ * Represents a chatbot in the application.
+ */
 public class Xenon {
 
     private TaskList tasks;
@@ -25,6 +28,13 @@ public class Xenon {
         }
     }
 
+    /**
+     * Initiates a chatbot session, providing an interactive loop for users to input commands
+     * and receive appropriate responses.
+     * <p>
+     * The session continues until an {@code ExitCommand} is executed.
+     *
+     */
     public void chat() {
         ui.showWelcome();
         boolean isExit = false;

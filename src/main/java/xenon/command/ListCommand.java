@@ -3,12 +3,20 @@ import xenon.storage.Storage;
 import xenon.tasklist.TaskList;
 import xenon.ui.Ui;
 
+/**
+ * Represents the command to list all tasks in the task list.
+ */
 public class ListCommand extends Command {
 
     public ListCommand() {
         super(false);
     }
 
+    /**
+     * Lists all the tasks present in the task list and displays them to the user via the user interface.
+     *
+     * @inheritDoc
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showResponse("Here are the tasks in your list\n" + tasks);

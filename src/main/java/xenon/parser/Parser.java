@@ -15,8 +15,20 @@ import xenon.command.ListCommand;
 import xenon.command.MarkCommand;
 import xenon.command.UnmarkCommand;
 
+/**
+ * Represents an object responsible for interpreting user input and converting it
+ * into appropriate Command objects for execution.
+ */
 public class Parser {
 
+    /**
+     * Parses the given input string and returns the corresponding Command object based on the parsed operation.
+     *
+     * @param input The input string representing the user command.
+     * @return A {@code Command} object representing the parsed command.
+     * @throws XenonException If the input string is blank, if the operation is not recognized,
+     *                        or if the input format is invalid for the specified command.
+     */
     public static Command parse(String input) throws XenonException {
         if (input.isBlank()) {
             throw new XenonException("Input cannot be empty");
@@ -65,6 +77,17 @@ public class Parser {
         throw new XenonException("Unable to parse input");
     }
 
+    /**
+     * Parses the deadline task details from the given task content string into an array of strings.
+     * The input string is split with the delimiter {@code /by} into two parts:
+     * the event description and the deadline.
+     *
+     * @param taskContents The string containing the event details in the format:
+     *                     {@code <description>} /by {@code <deadline>}.
+     * @return A string array where the first element is the event description
+     *         and the second element is the deadline,
+     * @throws XenonException If the input does not contain a deadline.
+     */
     public static String[] parseDeadline(String taskContents) throws XenonException {
         String[] tokens = taskContents.split("/by", 2);
 
@@ -80,6 +103,17 @@ public class Parser {
         return tokens;
     }
 
+    /**
+     * Parses the event details from the given task content string into an array of strings.
+     * The input string is split by the delimiters {@code /from} and {@code /to} into three parts:
+     * the event description, the start and end date.
+     *
+     * @param taskContents The string containing the event details in the format:
+     *                     {@code <description>} /from {@code <start date>} /to {@code <end date>}.
+     * @return A string array where the first element is the event description,
+     *         the second element is the start date, and the third element is the end date.
+     * @throws XenonException If the input does not contain both a start and end date.
+     */
     public static String[] parseEvent(String taskContents) throws XenonException {
         String[] tokens = taskContents.split("/from|/to", 3);
 
@@ -95,6 +129,14 @@ public class Parser {
         return tokens;
     }
 
+    /**
+     * Parses the given task number from a string input into an integer.
+     * The input string should represent a valid int.
+     *
+     * @param taskNumber The string representing the task number to be parsed.
+     * @return The parsed task number as an int.
+     * @throws XenonException If the input string is blank or does not represent a valid integer.
+     */
     public static int parseTaskNumber(String taskNumber) throws XenonException {
         if (taskNumber.isBlank()) {
             throw new XenonException("Please specify a task number.");
@@ -108,6 +150,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a date-time string into a LocalDateTime object.
+     * The input string must be in the format <code>dd/MM/yyyy HH:mm</code>.
+     *
+     * @param dateTimeInput The date-time string to be parsed, in the format <code>dd/MM/yyyy HH:mm</code>.
+     * @return A LocalDateTime object representing the parsed date and time.
+     * @throws XenonException If the input string does not match the expected format.
+     */
     public static LocalDateTime parseDateTime(String dateTimeInput) throws XenonException{
 
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");

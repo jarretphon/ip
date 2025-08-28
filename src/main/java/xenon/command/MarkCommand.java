@@ -7,6 +7,9 @@ import xenon.ui.Ui;
 import xenon.exception.XenonException;
 import xenon.task.Task;
 
+/**
+ * Represents a command to mark a specific task as done in the task list.
+ */
 public class MarkCommand extends Command {
 
     private int taskNumber;
@@ -16,6 +19,13 @@ public class MarkCommand extends Command {
         this.taskNumber = taskNumber;
     }
 
+    /**
+     * Marks a task with the specified task number as done.
+     * Updates the task list, displays the success message to the user, and saves the updated data to storage.
+     *
+     * @inheritDoc
+     * @throws XenonException if the task index is invalid or does not exist in the task list.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws XenonException {
         int taskIndex = this.taskNumber - 1;

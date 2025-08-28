@@ -4,6 +4,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import xenon.exception.XenonException;
 
+/**
+ * Represents an event with a start date and an end date.
+ * A {@code Event} corresponds to a task that takes place between
+ * a specific start and end date.
+ */
 public class Event extends Task {
 
     private LocalDateTime startDate;
@@ -25,6 +30,11 @@ public class Event extends Task {
 
     }
 
+    /**
+     * Converts the event into a string representation suitable for storage.
+     *
+     * @inheritDoc
+     */
     public String toStorageString() {
         // Date strings are in storage with ISO format yyyy-MM-dd HH:mm
         return "E | " + super.toStorageString() + " | " + this.startDate.toString() + " | " + this.endDate.toString();
