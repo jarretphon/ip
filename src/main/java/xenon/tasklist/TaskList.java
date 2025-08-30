@@ -46,7 +46,7 @@ public class TaskList {
     public Task delete(int taskIndex) throws XenonException {
 
         // Ensure that the taskIndex is within the range of available tasks
-        if (taskIndex < 0 || taskIndex > tasks.size() - 1) {;
+        if (taskIndex < 0 || taskIndex > tasks.size() - 1) {
             throw new XenonException("Task " + (taskIndex + 1) + " does not exist in your list");
         }
 
@@ -67,7 +67,7 @@ public class TaskList {
      */
     public Task markAsDone(int taskIndex) throws XenonException {
         // Ensure that the taskIndex is within the range of available tasks
-        if (taskIndex < 0 || taskIndex > tasks.size() - 1) {;
+        if (taskIndex < 0 || taskIndex > tasks.size() - 1) {
             throw new XenonException("Task " + (taskIndex + 1) + " does not exist in your list");
         }
 
@@ -87,7 +87,7 @@ public class TaskList {
      */
     public Task markAsNotDone(int taskIndex) throws XenonException {
         // Ensure that the taskIndex is within the range of available tasks
-        if (taskIndex < 0 || taskIndex > tasks.size() - 1) {;
+        if (taskIndex < 0 || taskIndex > tasks.size() - 1) {
             throw new XenonException("Task " + (taskIndex + 1) + " does not exist in your list");
         }
 
@@ -109,7 +109,7 @@ public class TaskList {
 
         for (int i = 0; i < this.tasks.size(); i++) {
             Task t = this.tasks.get(i);
-            if(t.containsPhrase(phrase)) {
+            if (t.containsPhrase(phrase)) {
                 results.add(t);
             }
         }

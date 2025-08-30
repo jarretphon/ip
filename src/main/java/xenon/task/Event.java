@@ -2,6 +2,7 @@ package xenon.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import xenon.exception.XenonException;
 
 /**
@@ -13,8 +14,18 @@ public class Event extends Task {
 
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("HH:mm, dd MMM yyyy");
+    private final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("HH:mm, dd MMM yyyy");
 
+    /**
+     * Creates a new Event object with a description, start date, and end date.
+     * An event represents a task that occurs within a specific time frame.
+     *
+     * @param description the description of the event
+     * @param startDate the start date and time of the event
+     * @param endDate the end date and time of the event
+     * @throws XenonException if the start or end dates are set before the current date,
+     *                        or if the end date is earlier than the start date
+     */
     public Event(String description, LocalDateTime startDate, LocalDateTime endDate) throws XenonException {
         super(description);
         this.startDate = startDate;
@@ -44,6 +55,6 @@ public class Event extends Task {
     public String toString() {
         // Date strings are displayed to the user with custom format dd MMM yyyy HH:mm
         return "[E]" + super.toString() + " (from: "
-                + this.startDate.format(OUTPUT_FORMATTER) + " to: " + this.endDate.format(OUTPUT_FORMATTER) + ")";
+                + this.startDate.format(outputFormatter) + " to: " + this.endDate.format(outputFormatter) + ")";
     }
 }

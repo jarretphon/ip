@@ -1,11 +1,13 @@
 package xenon.command;
 
 import java.io.IOException;
+
+import xenon.exception.XenonException;
 import xenon.storage.Storage;
+import xenon.task.Task;
 import xenon.tasklist.TaskList;
 import xenon.ui.Ui;
-import xenon.exception.XenonException;
-import xenon.task.Task;
+
 
 /**
  * Represents a command to mark a specific task as done in the task list.
@@ -14,6 +16,11 @@ public class MarkCommand extends Command {
 
     private int taskNumber;
 
+    /**
+     * Constructs a MarkCommand object with the specified task number to be marked as done.
+     *
+     * @param taskNumber The 1-based index of the task to be marked as done.
+     */
     public MarkCommand(int taskNumber) {
         super(false);
         this.taskNumber = taskNumber;

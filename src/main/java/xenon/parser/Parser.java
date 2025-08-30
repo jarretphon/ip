@@ -5,16 +5,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import xenon.Operation;
-import xenon.command.FindCommand;
-import xenon.exception.XenonException;
 import xenon.command.AddCommand;
 import xenon.command.Command;
 import xenon.command.DeleteCommand;
 import xenon.command.ExitCommand;
+import xenon.command.FindCommand;
 import xenon.command.HelpCommand;
 import xenon.command.ListCommand;
 import xenon.command.MarkCommand;
 import xenon.command.UnmarkCommand;
+import xenon.exception.XenonException;
 
 /**
  * Represents an object responsible for interpreting user input and converting it
@@ -49,7 +49,7 @@ public class Parser {
 
         switch (op) {
         case BYE:
-           return new ExitCommand();
+            return new ExitCommand();
         case HELP:
             return new HelpCommand();
         case LIST:
@@ -75,9 +75,9 @@ public class Parser {
             return new UnmarkCommand(parseTaskNumber(contents));
         case DELETE:
             return new DeleteCommand(parseTaskNumber(contents));
+        default:
+            throw new XenonException("Unable to parse input");
         }
-
-        throw new XenonException("Unable to parse input");
     }
 
     /**
@@ -120,7 +120,7 @@ public class Parser {
     public static String[] parseEvent(String taskContents) throws XenonException {
         String[] tokens = taskContents.split("/from|/to", 3);
 
-        // User did not specify start or end date
+        // User did not specify a start or end date
         if (tokens.length < 3) {
             throw new XenonException("You must specify both the start and end date for an event");
         }
@@ -161,7 +161,7 @@ public class Parser {
      * @return A LocalDateTime object representing the parsed date and time.
      * @throws XenonException If the input string does not match the expected format.
      */
-    public static LocalDateTime parseDateTime(String dateTimeInput) throws XenonException{
+    public static LocalDateTime parseDateTime(String dateTimeInput) throws XenonException {
 
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 

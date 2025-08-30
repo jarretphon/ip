@@ -1,11 +1,12 @@
 package xenon.command;
 
 import java.io.IOException;
+
+import xenon.exception.XenonException;
 import xenon.storage.Storage;
+import xenon.task.Task;
 import xenon.tasklist.TaskList;
 import xenon.ui.Ui;
-import xenon.exception.XenonException;
-import xenon.task.Task;
 
 /**
  * Represents a command to mark a specified task as not done.
@@ -14,6 +15,11 @@ public class UnmarkCommand extends Command {
 
     private int taskNumber;
 
+    /**
+     * Constructs an UnmarkCommand object with the specified task number to be marked as not done.
+     *
+     * @param taskNumber The 1-based index of the task to be marked as not done.
+     */
     public UnmarkCommand(int taskNumber) {
         super(false);
         this.taskNumber = taskNumber;

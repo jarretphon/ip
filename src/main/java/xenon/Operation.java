@@ -39,7 +39,9 @@ public enum Operation {
      */
     public static Operation fromInput(String input) {
         for (Operation cmd : Operation.values()) {
-            if (cmd.keyword.equals(input)) return cmd;
+            if (cmd.keyword.equals(input)) {
+                return cmd;
+            }
         }
         return null;
     }

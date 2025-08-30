@@ -2,6 +2,7 @@ package xenon.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import xenon.exception.XenonException;
 
 /**
@@ -12,9 +13,17 @@ import xenon.exception.XenonException;
 public class DeadlineTask extends Task {
 
     private LocalDateTime deadline;
-    private final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("HH:mm, dd MMM yyyy");
+    private final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("HH:mm, dd MMM yyyy");
 
 
+    /**
+     * Creates a new DeadlineTask with the specified description and deadline.
+     * A DeadlineTask represents a type of task that must be completed by a specific date and time.
+     *
+     * @param description the description of the deadline task
+     * @param deadline the deadline of the task, specified as a LocalDateTime object
+     * @throws XenonException if the provided deadline is before the current date and time
+     */
     public DeadlineTask(String description, LocalDateTime deadline) throws XenonException {
         super(description);
         this.deadline = deadline;
@@ -38,6 +47,6 @@ public class DeadlineTask extends Task {
     @Override
     public String toString() {
         // Date strings are displayed to the user with custom format dd MMM yyyy HH:mm
-        return "[D]" + super.toString() + " (by: " + this.deadline.format(OUTPUT_FORMATTER) + ")";
+        return "[D]" + super.toString() + " (by: " + this.deadline.format(outputFormatter) + ")";
     }
 }

@@ -1,11 +1,12 @@
 package xenon.command;
 
 import java.io.IOException;
+
+import xenon.exception.XenonException;
 import xenon.storage.Storage;
+import xenon.task.Task;
 import xenon.tasklist.TaskList;
 import xenon.ui.Ui;
-import xenon.exception.XenonException;
-import xenon.task.Task;
 
 /**
  * Represents a delete command to remove a specific task from the task list.
@@ -15,6 +16,12 @@ public class DeleteCommand extends Command {
 
     private int taskNumber;
 
+    /**
+     * Constructs a DeleteCommand with the specified task number.
+     * This command is used to remove a task identified by its position in the task list.
+     *
+     * @param taskNumber The 1-based index of the task to be removed from the task list.
+     */
     public DeleteCommand(int taskNumber) {
         super(false);
         this.taskNumber = taskNumber;
