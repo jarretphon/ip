@@ -13,6 +13,11 @@ public class FindCommand extends Command {
 
     private String phrase;
 
+    /**
+     * Constructs a FindCommand object to search for tasks containing a specific phrase.
+     *
+     * @param phrase The phrase to search for within task descriptions.
+     */
     public FindCommand(String phrase) {
         super(false);
         this.phrase = phrase;

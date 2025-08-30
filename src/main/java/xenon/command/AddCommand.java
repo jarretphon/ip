@@ -2,14 +2,15 @@ package xenon.command;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import xenon.storage.Storage;
-import xenon.tasklist.TaskList;
-import xenon.ui.Ui;
+
 import xenon.exception.XenonException;
-import xenon.task.Task;
-import xenon.task.TodoTask;
+import xenon.storage.Storage;
 import xenon.task.DeadlineTask;
 import xenon.task.Event;
+import xenon.task.Task;
+import xenon.task.TodoTask;
+import xenon.tasklist.TaskList;
+import xenon.ui.Ui;
 
 /**
  * Represents a command that creates and adds a new task to the task list.
@@ -23,17 +24,39 @@ public class AddCommand extends Command {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
+    /**
+     * Constructs an AddCommand object with a specified task description.
+     * This variant of the AddCommand constructor is used to create a ToDoTask.
+     *
+     * @param description The description of the task to be added.
+     */
     public AddCommand(String description) {
         super(false);
         this.description = description;
     }
 
+    /**
+     * Constructs an AddCommand with a specified task description and deadline.
+     * This variant of the AddCommand constructor is used to create a DeadlineTask.
+     *
+     * @param description The description of the task to be added.
+     * @param deadline The deadline by which the task must be completed.
+     */
     public AddCommand(String description, LocalDateTime deadline) {
         super(false);
         this.description = description;
         this.deadline = deadline;
     }
 
+    /**
+     * Constructs an AddCommand with a specified description, start date,
+     * and end date to the task list. This variant of the AddCommand constructor
+     * is used to create an Event.
+     *
+     * @param description The description of the task to be added.
+     * @param startDate The start date and time of the Event.
+     * @param endDate The end date and time of the Event.
+     */
     public AddCommand(String description, LocalDateTime startDate, LocalDateTime endDate) {
         super(false);
         this.description = description;

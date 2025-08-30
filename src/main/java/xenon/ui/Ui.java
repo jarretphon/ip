@@ -1,6 +1,7 @@
 package xenon.ui;
 
 import java.util.Scanner;
+
 import xenon.Operation;
 
 /**

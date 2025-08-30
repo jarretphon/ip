@@ -18,6 +18,14 @@ public class Xenon {
     private Storage storage;
     private Ui ui;
 
+    /**
+     * Constructs a new instance of the Xenon chatbot.
+     * Initialises the user interface, storage system, and loads any existing tasks
+     * from the specified file path.
+     *
+     * @param filePath The file path where the task data is stored. This file
+     *                 will be used to load existing tasks and persist new ones.
+     */
     public Xenon(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

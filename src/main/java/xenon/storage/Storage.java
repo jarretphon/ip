@@ -17,10 +17,10 @@ import xenon.task.Task;
  */
 public class Storage {
 
-    private final String FILE_PATH;
+    private final String filePath;
 
     public Storage(String filePath) {
-        this.FILE_PATH = filePath;
+        this.filePath = filePath;
     }
 
     /**
@@ -70,7 +70,7 @@ public class Storage {
      * @throws IOException If an I/O error occurs while writing to the file.
      */
     public void saveData(ArrayList<Task> tasks) throws IOException {
-        FileWriter fw = new FileWriter(this.FILE_PATH);
+        FileWriter fw = new FileWriter(this.filePath);
         for (Task t : tasks) {
             fw.write(t.toStorageString() + "\n");
         }

@@ -1,9 +1,9 @@
 package xenon.command;
 
+import xenon.exception.XenonException;
 import xenon.storage.Storage;
 import xenon.tasklist.TaskList;
 import xenon.ui.Ui;
-import xenon.exception.XenonException;
 
 /**
  * Represents an abstract command to be executed.

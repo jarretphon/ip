@@ -15,6 +15,12 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates a new task with the specified description.
+     * The task is initially marked as not done.
+     *
+     * @param description the description of the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -44,11 +50,6 @@ public class Task {
         }
     }
 
-    /**
-     * Converts the task into a string representation suitable for storage.
-     *
-     * @return a formatted string representing the task for storage purposes.
-     */
     /**
      * Checks if the given phrase is contained within the task's description.
      * The matching is case-insensitive.
@@ -106,7 +107,7 @@ public class Task {
         Task task;
 
         try {
-            // Create appropriate task for each task Type
+            // Create the appropriate task for each task Type
             if (type.equals("T")) {
                 task = new TodoTask(description);
             } else if (type.equals("D")) {
@@ -124,7 +125,9 @@ public class Task {
                     + " is an invalid date format. Dates should be given in ISO format");
         }
 
-        if (completionStatus.equals("1")) task.markAsDone();
+        if (completionStatus.equals("1")) {
+            task.markAsDone();
+        }
 
         return task;
     }
