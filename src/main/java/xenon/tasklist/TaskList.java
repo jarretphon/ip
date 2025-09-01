@@ -125,7 +125,7 @@ public class TaskList {
             if (i > 0) {
                 sb.append("\n");
             }
-            sb.append("\t").append((i + 1)).append(". ").append(tasks.get(i));
+            sb.append("  ").append((i + 1)).append(". ").append(tasks.get(i));
         }
         return sb.toString();
     }
