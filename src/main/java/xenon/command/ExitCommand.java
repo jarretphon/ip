@@ -19,7 +19,8 @@ public class ExitCommand extends Command {
      * @inheritDoc
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showGoodBye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        //ui.showGoodBye();
+        return "Bye. Hope to see you again soon!";
     }
 }

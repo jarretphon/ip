@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
      * @throws XenonException If the task number is invalid or does not exist in the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws XenonException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws XenonException {
         int taskIndex = this.taskNumber - 1;
         Task deletedTask = tasks.delete(taskIndex);
 
@@ -46,6 +46,7 @@ public class DeleteCommand extends Command {
             System.out.println("Unable to save data");
         }
 
-        ui.showResponse("Noted. I've removed this task\n" + "\t" + deletedTask);
+        //ui.showResponse("Noted. I've removed this task\n" + "\t" + deletedTask);
+        return "Noted. I've removed this task\n" + "\t" + deletedTask;
     }
 }
