@@ -10,8 +10,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import xenon.exception.XenonException;
 
+/**
+ * Serves as the primary GUI for the chatbot application.
+ * It enables user interaction and displays chatbot responses.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -40,11 +43,13 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Handles user input and updates the dialog container with user and chatbot responses.
+     * Retrieves the user's input, generates a response from the chatbot, and displays both
+     * the input and response in the dialog.
+     *
      */
     @FXML
-    private void handleUserInput() throws XenonException {
+    private void handleUserInput() {
         String input = userInput.getText();
         String response = xenon.getResponse(input);
         String commandType = xenon.getCommandType();

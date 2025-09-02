@@ -14,12 +14,24 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * Represents a dialog box consisting of a label for dialog text and an ImageView for displaying a picture.
+ * The dialog box can represent user messages or chatbot responses.
+ * It can be flipped such that the image and text positions are interchanged.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructs a DialogBox object with the specified text and image.
+     * The DialogBox is initialized and loaded from its corresponding FXML file.
+     *
+     * @param text The text content to be displayed in the dialog box.
+     * @param img The image to be displayed beside the text in the dialog box.
+     */
     public DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
