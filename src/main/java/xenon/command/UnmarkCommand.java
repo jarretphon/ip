@@ -33,16 +33,18 @@ public class UnmarkCommand extends Command {
      * @throws XenonException if the task index is invalid or does not exist in the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws XenonException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws XenonException {
         int taskIndex = this.taskNumber - 1;
         Task unmarkedTask = tasks.markAsNotDone(taskIndex);
-        ui.showResponse("Ok, I've marked this task as not done yet:\n" + "\t" + unmarkedTask);
+        //ui.showResponse("Ok, I've marked this task as not done yet:\n" + "\t" + unmarkedTask);
 
         try {
             storage.saveData(tasks.getAll());
         } catch (IOException e) {
             System.out.println("Unable to save data");
         }
+
+        return "Ok, I've marked this task as not done yet:\n" + "\t" + unmarkedTask;
     }
 }
 

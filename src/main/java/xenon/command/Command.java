@@ -32,8 +32,9 @@ public abstract class Command {
      *           and interacting with the user.
      * @param storage The storage system responsible for saving and loading tasks
      *                to and from the designated file.
+     * @return A formatted response message to be displayed to the user.
      * @throws XenonException If an error specific to Xenon occurs during the execution
      *                        of the command.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws XenonException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws XenonException;
 }

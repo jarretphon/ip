@@ -55,7 +55,7 @@ public enum Operation {
     public static String showUsageGuide() {
         StringBuilder helpText = new StringBuilder("Here are the commands you can use:\n");
         for (Operation c : Operation.values()) {
-            helpText.append(String.format("- %-60s - %s%n", c.usage, c.description));
+            helpText.append(String.format("- %-55s - %s%n", c.usage, c.description));
         }
         return helpText.toString();
     }

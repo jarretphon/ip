@@ -30,7 +30,7 @@ public class FindCommand extends Command {
      * @inheritDoc
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws XenonException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws XenonException {
 
         if (this.phrase.isBlank()) {
             throw new XenonException("Include a word/phrase to search for");
@@ -39,9 +39,11 @@ public class FindCommand extends Command {
         TaskList results = taskList.findTasksContaining(this.phrase);
 
         if (results.size() == 0) {
-            ui.showResponse("No matching tasks in your list");
+            //ui.showResponse("No matching tasks in your list");
+            return "No matching tasks in your list";
         } else {
-            ui.showResponse("Here are the matching tasks in your list\n" + results);
+            //ui.showResponse("Here are the matching tasks in your list\n" + results);
+            return "Here are the matching tasks in your list\n" + results;
         }
     }
 }

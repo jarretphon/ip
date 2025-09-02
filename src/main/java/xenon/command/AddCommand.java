@@ -74,7 +74,7 @@ public class AddCommand extends Command {
      * @throws XenonException If the task description is empty or invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws XenonException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws XenonException {
 
         if (this.description.isBlank()) {
             throw new XenonException("Task description cannot be empty");
@@ -97,7 +97,8 @@ public class AddCommand extends Command {
             System.out.println("Unable to save data");
         }
 
-        ui.showResponse("added " + task);
+        //ui.showResponse("added " + task);
+        return "added " + task;
     }
 }
 
