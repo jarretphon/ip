@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
     public void setXenon(Xenon x) {
         this.xenon = x;
         String welcome = "Hello! I'm Xenon\n" + "What can I do for you?\n\n" + Operation.showUsageGuide();
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcome, xenonImage));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcome, xenonImage, ""));
     }
 
     /**
@@ -47,10 +47,11 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() throws XenonException {
         String input = userInput.getText();
         String response = xenon.getResponse(input);
+        String commandType = xenon.getCommandType();
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, xenonImage)
+                DialogBox.getDukeDialog(response, xenonImage, commandType)
         );
         userInput.clear();
 

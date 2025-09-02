@@ -17,6 +17,7 @@ public class Xenon {
     private TaskList tasks;
     private Storage storage;
     private Ui ui;
+    private String commandType;
 
     /**
      * Constructs a new instance of the Xenon chatbot.
@@ -48,11 +49,17 @@ public class Xenon {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
+            commandType = c.getClass().getSimpleName();
             return c.execute(this.tasks, this.ui, this.storage);
         } catch (XenonException error) {
+            commandType = "Error";
             return error + "\n"
                     + "If you are unsure of how to use me, type 'help' to see a list of available commands";
         }
 
+    }
+
+    public String getCommandType() {
+        return commandType;
     }
 }

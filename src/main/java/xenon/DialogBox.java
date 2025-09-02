@@ -45,9 +45,10 @@ public class DialogBox extends HBox {
         dialog.getStyleClass().add("reply-label");
     }
 
-    public static DialogBox getDukeDialog(String s, Image i) {
+    public static DialogBox getDukeDialog(String s, Image i, String commandType) {
         var db = new DialogBox(s, i);
         db.flip();
+        db.changeDialogStyle(commandType);
         return db;
     }
 
@@ -55,5 +56,20 @@ public class DialogBox extends HBox {
         var db = new DialogBox(s, i);
         db.dialog.getStyleClass().add("user-label");
         return db;
+    }
+
+    private void changeDialogStyle(String commandType) {
+        switch (commandType) {
+        case "MarkCommand":
+        case "UnmarkCommand":
+        case "DeleteCommand":
+            dialog.getStyleClass().add("success-label");
+            break;
+        case "Error":
+            dialog.getStyleClass().add("error-label");
+            break;
+        default:
+            // Do nothing
+        }
     }
 }
