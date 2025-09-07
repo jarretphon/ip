@@ -10,7 +10,6 @@ import xenon.task.Event;
 import xenon.task.Task;
 import xenon.task.TodoTask;
 import xenon.tasklist.TaskList;
-import xenon.ui.Ui;
 
 /**
  * Represents a command that creates and adds a new task to the task list.
@@ -74,7 +73,7 @@ public class AddCommand extends Command {
      * @throws XenonException If the task description is empty or invalid.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws XenonException {
+    public String execute(TaskList tasks, Storage storage) throws XenonException {
 
         Task task = createTask();
         tasks.add(task);

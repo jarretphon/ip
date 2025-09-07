@@ -3,7 +3,6 @@ package xenon.command;
 import xenon.exception.XenonException;
 import xenon.storage.Storage;
 import xenon.tasklist.TaskList;
-import xenon.ui.Ui;
 
 /**
  * Represents a command that finds all tasks containing a specific phrase
@@ -30,7 +29,7 @@ public class FindCommand extends Command {
      * @inheritDoc
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws XenonException {
+    public String execute(TaskList taskList, Storage storage) throws XenonException {
 
         if (this.searchPhrase.isBlank()) {
             throw new XenonException("Include a word/phrase to search for");

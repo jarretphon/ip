@@ -6,7 +6,6 @@ import xenon.exception.XenonException;
 import xenon.storage.Storage;
 import xenon.task.Task;
 import xenon.tasklist.TaskList;
-import xenon.ui.Ui;
 
 
 /**
@@ -45,7 +44,7 @@ public class SetCompletionCommand extends Command {
      * @throws XenonException if the task index is invalid or does not exist in the task list.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws XenonException {
+    public String execute(TaskList tasks, Storage storage) throws XenonException {
         int taskIndex = this.taskNumber - 1;
 
         Task targetTask = this.action == Action.MARK
