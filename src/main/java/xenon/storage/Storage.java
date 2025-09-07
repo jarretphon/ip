@@ -49,7 +49,6 @@ public class Storage {
             return tasks;
         }
 
-        // Read the data from file into memory
         while (s.hasNext()) {
             String savedTask = s.nextLine();
             try {

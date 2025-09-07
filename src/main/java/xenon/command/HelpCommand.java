@@ -2,7 +2,6 @@ package xenon.command;
 import xenon.Operation;
 import xenon.storage.Storage;
 import xenon.tasklist.TaskList;
-import xenon.ui.Ui;
 
 
 /**
@@ -20,7 +19,7 @@ public class HelpCommand extends Command {
      * @inheritDoc
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         //ui.showResponse(Operation.showUsageGuide());
         return Operation.showUsageGuide();
     }

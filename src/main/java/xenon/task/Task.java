@@ -12,6 +12,10 @@ import xenon.exception.XenonException;
  * an item with a description and completion status.
  */
 public class Task {
+
+    private static final String TASK_IS_DONE = "1";
+    private static final String TASK_IS_NOT_DONE = "0";
+
     protected String description;
     protected boolean isDone;
 
@@ -28,7 +32,11 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " ");
+    }
+
+    private static boolean isValidCompletionStatus(String status) {
+        return status.equals(TASK_IS_DONE) || status.equals(TASK_IS_NOT_DONE);
     }
 
     /**
@@ -102,7 +110,7 @@ public class Task {
         String completionStatus = tokens[1];
         String description = tokens[2];
 
-        if (!completionStatus.equals("0") && !completionStatus.equals("1")) {
+        if (!isValidCompletionStatus(completionStatus)) {
             throw new XenonException(completionStatus + " is an invalid completion status");
         }
 

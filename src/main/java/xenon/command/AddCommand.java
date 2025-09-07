@@ -10,7 +10,6 @@ import xenon.task.Event;
 import xenon.task.Task;
 import xenon.task.TodoTask;
 import xenon.tasklist.TaskList;
-import xenon.ui.Ui;
 
 /**
  * Represents a command that creates and adds a new task to the task list.
@@ -74,31 +73,32 @@ public class AddCommand extends Command {
      * @throws XenonException If the task description is empty or invalid.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws XenonException {
+    public String execute(TaskList tasks, Storage storage) throws XenonException {
 
-        if (this.description.isBlank()) {
-            throw new XenonException("Task description cannot be empty");
-        }
-
-        Task task;
-
-        if (this.deadline != null) {
-            task = new DeadlineTask(this.description, this.deadline);
-        } else if (this.startDate != null && this.endDate != null) {
-            task = new Event(this.description, this.startDate, this.endDate);
-        } else {
-            task = new TodoTask(this.description);
-        }
-
+        Task task = createTask();
         tasks.add(task);
+
         try {
             storage.saveData(tasks.getAll());
         } catch (IOException e) {
             System.out.println("Unable to save data");
         }
 
-        //ui.showResponse("added " + task);
         return "added " + task;
+    }
+
+    private Task createTask() throws XenonException {
+        if (this.description.isBlank()) {
+            throw new XenonException("Task description cannot be empty");
+        }
+
+        if (this.deadline != null) {
+            return new DeadlineTask(this.description, this.deadline);
+        } else if (this.startDate != null && this.endDate != null) {
+            return new Event(this.description, this.startDate, this.endDate);
+        } else {
+            return new TodoTask(this.description);
+        }
     }
 }
 

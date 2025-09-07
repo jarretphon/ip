@@ -12,8 +12,7 @@ import xenon.command.ExitCommand;
 import xenon.command.FindCommand;
 import xenon.command.HelpCommand;
 import xenon.command.ListCommand;
-import xenon.command.MarkCommand;
-import xenon.command.UnmarkCommand;
+import xenon.command.SetCompletionCommand;
 import xenon.exception.XenonException;
 
 /**
@@ -70,9 +69,9 @@ public class Parser {
             LocalDateTime endDate = parseDateTime(eventArgs[2]);
             return new AddCommand(eventDescription, startDate, endDate);
         case MARK:
-            return new MarkCommand(parseTaskNumber(contents));
+            return new SetCompletionCommand(parseTaskNumber(contents), SetCompletionCommand.Action.MARK);
         case UNMARK:
-            return new UnmarkCommand(parseTaskNumber(contents));
+            return new SetCompletionCommand(parseTaskNumber(contents), SetCompletionCommand.Action.UNMARK);
         case DELETE:
             return new DeleteCommand(parseTaskNumber(contents));
         default:
@@ -92,20 +91,8 @@ public class Parser {
      * @throws XenonException If the input does not contain a deadline.
      */
     public static String[] parseDeadline(String taskContents) throws XenonException {
-        assert taskContents != null : "Task contents cannot be null";
-
-        String[] tokens = taskContents.split("/by", 2);
-
-        // User did not specify deadline
-        if (tokens.length < 2) {
-            throw new XenonException("You must specify a due date for a deadline task");
-        }
-
-        for (int i = 0; i < tokens.length; i++) {
-            tokens[i] = tokens[i].trim();
-        }
-
-        return tokens;
+        return tokenise(taskContents, "/by", 2,
+                "You must specify a due date for a deadline task");
     }
 
     /**
@@ -120,21 +107,8 @@ public class Parser {
      * @throws XenonException If the input does not contain both a start and end date.
      */
     public static String[] parseEvent(String taskContents) throws XenonException {
-
-        assert taskContents != null : "Task contents cannot be null";
-
-        String[] tokens = taskContents.split("/from|/to", 3);
-
-        // User did not specify a start or end date
-        if (tokens.length < 3) {
-            throw new XenonException("You must specify both the start and end date for an event");
-        }
-
-        for (int i = 0; i < tokens.length; i++) {
-            tokens[i] = tokens[i].trim();
-        }
-
-        return tokens;
+        return tokenise(taskContents, "/from|/to", 3,
+                "Invalid event input. Please specify both a start and end date for an event.");
     }
 
     /**
@@ -183,5 +157,35 @@ public class Parser {
                             + "E.g. 27/08/2025 09:30"
             );
         }
+    }
+
+    /**
+     * Tokenizes the given command body string based on a specified delimiter.
+     * Each token is trimmed of leading and trailing whitespace.
+     * If the number of tokens is lower than expected, a XenonException is thrown.
+     *
+     * @param commandBody The input string to be tokenised.
+     * @param splitBy The regex delimiter used to split the input string.
+     * @param expectedTokens The expected number of tokens to be obtained after splitting.
+     * @param errorMessage The error message to include in the exception if the token count is lower than expected.
+     * @return An array of strings containing the tokens after splitting and trimming.
+     * @throws XenonException If the number of tokens is lower than the expected count.
+     */
+    public static String[] tokenise(String commandBody, String splitBy, int expectedTokens,
+            String errorMessage) throws XenonException {
+
+        assert commandBody != null : "command body cannot be null";
+
+        String[] tokens = commandBody.split(splitBy, expectedTokens);
+
+        if (tokens.length < expectedTokens) {
+            throw new XenonException(errorMessage);
+        }
+
+        for (int i = 0; i < tokens.length; i++) {
+            tokens[i] = tokens[i].trim();
+        }
+
+        return tokens;
     }
 }

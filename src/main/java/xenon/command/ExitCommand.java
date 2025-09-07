@@ -1,7 +1,6 @@
 package xenon.command;
 import xenon.storage.Storage;
 import xenon.tasklist.TaskList;
-import xenon.ui.Ui;
 
 /**
  * Represents the command that exits the application.
@@ -19,7 +18,7 @@ public class ExitCommand extends Command {
      * @inheritDoc
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         //ui.showGoodBye();
         return "Bye. Hope to see you again soon!";
     }

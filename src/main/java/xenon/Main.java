@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import xenon.ui.MainWindow;
 
 /**
  * The Main class serves as the entry point for the chatbot application.

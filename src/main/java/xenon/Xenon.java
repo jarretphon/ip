@@ -7,7 +7,6 @@ import xenon.exception.XenonException;
 import xenon.parser.Parser;
 import xenon.storage.Storage;
 import xenon.tasklist.TaskList;
-import xenon.ui.Ui;
 
 /**
  * Represents a chatbot in the application.
@@ -16,7 +15,6 @@ public class Xenon {
 
     private TaskList tasks;
     private Storage storage;
-    private Ui ui;
     private String commandType;
 
     /**
@@ -28,7 +26,6 @@ public class Xenon {
      *                 will be used to load existing tasks and persist new ones.
      */
     public Xenon(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         try {
             this.tasks = new TaskList(storage.loadData(filePath));
@@ -50,7 +47,7 @@ public class Xenon {
         try {
             Command c = Parser.parse(input);
             commandType = c.getClass().getSimpleName();
-            return c.execute(this.tasks, this.ui, this.storage);
+            return c.execute(this.tasks, this.storage);
         } catch (XenonException error) {
             commandType = "Error";
             return error + "\n"
