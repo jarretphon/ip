@@ -26,6 +26,7 @@ public class Task {
      * @param description the description of the task
      */
     public Task(String description) {
+        assert description != null : "Description cannot be null";
         this.description = description;
         this.isDone = false;
     }
@@ -66,6 +67,7 @@ public class Task {
      * @return true if the phrase is found in the description, false otherwise
      */
     public boolean containsPhrase(String phrase) {
+        assert phrase != null : "Phrase cannot be null";
         Pattern pattern = Pattern.compile(phrase.trim(), Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(this.description);
         return matcher.find();
@@ -96,7 +98,7 @@ public class Task {
      *                        or improperly formatted date.
      */
     public static Task fromStorageString(String storageString) throws XenonException {
-
+        assert storageString != null : "Storage string cannot be null";
         String[] tokens = storageString.split("\\|");
 
         // Remove leading and trailing white spaces

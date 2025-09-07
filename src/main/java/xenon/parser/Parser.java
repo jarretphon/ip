@@ -120,10 +120,14 @@ public class Parser {
      * @throws XenonException If the input string is blank or does not represent a valid integer.
      */
     public static int parseTaskNumber(String taskNumber) throws XenonException {
+
+        assert taskNumber != null : "Task number cannot be null";
+
         if (taskNumber.isBlank()) {
             throw new XenonException("Please specify a task number.");
         }
 
+        // Ensure that the user provided a numerical taskId
         try {
             return Integer.parseInt(taskNumber);
         } catch (NumberFormatException e) {
@@ -140,6 +144,8 @@ public class Parser {
      * @throws XenonException If the input string does not match the expected format.
      */
     public static LocalDateTime parseDateTime(String dateTimeInput) throws XenonException {
+
+        assert dateTimeInput != null : "Date-time input cannot be null";
 
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
@@ -167,6 +173,8 @@ public class Parser {
      */
     public static String[] tokenise(String commandBody, String splitBy, int expectedTokens,
             String errorMessage) throws XenonException {
+
+        assert commandBody != null : "command body cannot be null";
 
         String[] tokens = commandBody.split(splitBy, expectedTokens);
 

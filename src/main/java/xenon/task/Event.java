@@ -28,6 +28,10 @@ public class Event extends Task {
      */
     public Event(String description, LocalDateTime startDate, LocalDateTime endDate) throws XenonException {
         super(description);
+
+        assert startDate != null : "Start date cannot be null";
+        assert endDate != null : "End date cannot be null";
+
         this.startDate = startDate;
         this.endDate = endDate;
 

@@ -26,6 +26,8 @@ public class DeadlineTask extends Task {
      */
     public DeadlineTask(String description, LocalDateTime deadline) throws XenonException {
         super(description);
+
+        assert deadline != null : "Deadline cannot be null";
         this.deadline = deadline;
 
         if (this.deadline.isBefore(LocalDateTime.now())) {
