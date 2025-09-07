@@ -46,6 +46,7 @@ public class Event extends Task {
      *
      * @inheritDoc
      */
+    @Override
     public String toStorageString() {
         // Date strings are in storage with ISO format yyyy-MM-dd HH:mm
         return "E | " + super.toStorageString() + " | " + this.startDate.toString() + " | " + this.endDate.toString();

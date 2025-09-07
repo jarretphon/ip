@@ -76,29 +76,30 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws XenonException {
 
-        if (this.description.isBlank()) {
-            throw new XenonException("Task description cannot be empty");
-        }
-
-        Task task;
-
-        if (this.deadline != null) {
-            task = new DeadlineTask(this.description, this.deadline);
-        } else if (this.startDate != null && this.endDate != null) {
-            task = new Event(this.description, this.startDate, this.endDate);
-        } else {
-            task = new TodoTask(this.description);
-        }
-
+        Task task = createTask();
         tasks.add(task);
+
         try {
             storage.saveData(tasks.getAll());
         } catch (IOException e) {
             System.out.println("Unable to save data");
         }
 
-        //ui.showResponse("added " + task);
         return "added " + task;
+    }
+
+    private Task createTask() throws XenonException {
+        if (this.description.isBlank()) {
+            throw new XenonException("Task description cannot be empty");
+        }
+
+        if (this.deadline != null) {
+            return new DeadlineTask(this.description, this.deadline);
+        } else if (this.startDate != null && this.endDate != null) {
+            return new Event(this.description, this.startDate, this.endDate);
+        } else {
+            return new TodoTask(this.description);
+        }
     }
 }
 

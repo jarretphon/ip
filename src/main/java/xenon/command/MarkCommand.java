@@ -37,7 +37,6 @@ public class MarkCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws XenonException {
         int taskIndex = this.taskNumber - 1;
         Task markedTask = tasks.markAsDone(taskIndex);
-        //ui.showResponse("Nice! I've marked this task as done:\n" + "\t" + markedTask);
 
         try {
             storage.saveData(tasks.getAll());
