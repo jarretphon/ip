@@ -12,8 +12,7 @@ import xenon.command.ExitCommand;
 import xenon.command.FindCommand;
 import xenon.command.HelpCommand;
 import xenon.command.ListCommand;
-import xenon.command.MarkCommand;
-import xenon.command.UnmarkCommand;
+import xenon.command.SetCompletionCommand;
 import xenon.exception.XenonException;
 
 /**
@@ -70,9 +69,9 @@ public class Parser {
             LocalDateTime endDate = parseDateTime(eventArgs[2]);
             return new AddCommand(eventDescription, startDate, endDate);
         case MARK:
-            return new MarkCommand(parseTaskNumber(contents));
+            return new SetCompletionCommand(parseTaskNumber(contents), SetCompletionCommand.Action.MARK);
         case UNMARK:
-            return new UnmarkCommand(parseTaskNumber(contents));
+            return new SetCompletionCommand(parseTaskNumber(contents), SetCompletionCommand.Action.UNMARK);
         case DELETE:
             return new DeleteCommand(parseTaskNumber(contents));
         default:
