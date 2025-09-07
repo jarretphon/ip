@@ -35,6 +35,9 @@ public class Storage {
      * @throws IOException If an I/O error occurs while accessing or creating the file.
      */
     public ArrayList<Task> loadData(String filePath) throws IOException {
+
+        assert filePath != null : "File path cannot be null";
+
         File file = new File(filePath);
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner s;
@@ -70,6 +73,9 @@ public class Storage {
      * @throws IOException If an I/O error occurs while writing to the file.
      */
     public void saveData(ArrayList<Task> tasks) throws IOException {
+
+        assert tasks != null : "Task list cannot be null";
+
         FileWriter fw = new FileWriter(this.filePath);
         for (Task t : tasks) {
             fw.write(t.toStorageString() + "\n");

@@ -45,7 +45,6 @@ public class TaskList {
      */
     public Task delete(int taskIndex) throws XenonException {
 
-        // Ensure that the taskIndex is within the range of available tasks
         if (taskIndex < 0 || taskIndex > tasks.size() - 1) {
             throw new XenonException("Task " + (taskIndex + 1) + " does not exist in your list");
         }
@@ -66,7 +65,6 @@ public class TaskList {
      *                        of the task list.
      */
     public Task markAsDone(int taskIndex) throws XenonException {
-        // Ensure that the taskIndex is within the range of available tasks
         if (taskIndex < 0 || taskIndex > tasks.size() - 1) {
             throw new XenonException("Task " + (taskIndex + 1) + " does not exist in your list");
         }
@@ -86,7 +84,6 @@ public class TaskList {
      *                        of the task list.
      */
     public Task markAsNotDone(int taskIndex) throws XenonException {
-        // Ensure that the taskIndex is within the range of available tasks
         if (taskIndex < 0 || taskIndex > tasks.size() - 1) {
             throw new XenonException("Task " + (taskIndex + 1) + " does not exist in your list");
         }
@@ -104,6 +101,8 @@ public class TaskList {
      * @return a new TaskList containing tasks whose descriptions include the phrase
      */
     public TaskList findTasksContaining(String phrase) {
+
+        assert phrase != null : "Phrase cannot be null";
 
         TaskList results = new TaskList(new ArrayList<Task>());
 

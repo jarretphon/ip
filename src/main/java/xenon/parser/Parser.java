@@ -92,6 +92,8 @@ public class Parser {
      * @throws XenonException If the input does not contain a deadline.
      */
     public static String[] parseDeadline(String taskContents) throws XenonException {
+        assert taskContents != null : "Task contents cannot be null";
+
         String[] tokens = taskContents.split("/by", 2);
 
         // User did not specify deadline
@@ -118,6 +120,9 @@ public class Parser {
      * @throws XenonException If the input does not contain both a start and end date.
      */
     public static String[] parseEvent(String taskContents) throws XenonException {
+
+        assert taskContents != null : "Task contents cannot be null";
+
         String[] tokens = taskContents.split("/from|/to", 3);
 
         // User did not specify a start or end date
@@ -141,6 +146,9 @@ public class Parser {
      * @throws XenonException If the input string is blank or does not represent a valid integer.
      */
     public static int parseTaskNumber(String taskNumber) throws XenonException {
+
+        assert taskNumber != null : "Task number cannot be null";
+
         if (taskNumber.isBlank()) {
             throw new XenonException("Please specify a task number.");
         }
@@ -162,6 +170,8 @@ public class Parser {
      * @throws XenonException If the input string does not match the expected format.
      */
     public static LocalDateTime parseDateTime(String dateTimeInput) throws XenonException {
+
+        assert dateTimeInput != null : "Date-time input cannot be null";
 
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
