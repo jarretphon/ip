@@ -8,6 +8,7 @@ import xenon.Operation;
 import xenon.command.AddCommand;
 import xenon.command.Command;
 import xenon.command.DeleteCommand;
+import xenon.command.EditCommand;
 import xenon.command.ExitCommand;
 import xenon.command.FindCommand;
 import xenon.command.HelpCommand;
@@ -72,6 +73,8 @@ public class Parser {
             return new SetCompletionCommand(parseTaskNumber(contents), SetCompletionCommand.Action.MARK);
         case UNMARK:
             return new SetCompletionCommand(parseTaskNumber(contents), SetCompletionCommand.Action.UNMARK);
+        case EDIT:
+            return new EditCommand(parseTaskNumber(contents));
         case DELETE:
             return new DeleteCommand(parseTaskNumber(contents));
         default:

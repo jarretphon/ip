@@ -57,6 +57,14 @@ public class Event extends Task {
     }
 
     @Override
+    public String toCommandString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return "event " + this.description + " /from "
+                + this.startDate.format(formatter) + " /to "
+                + this.endDate.format(formatter);
+    }
+
+    @Override
     public String toString() {
         // Date strings are displayed to the user with custom format dd MMM yyyy HH:mm
         return "[E]" + super.toString() + " (from: "

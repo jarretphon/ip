@@ -39,6 +39,10 @@ public class Task {
         return status.equals(TASK_IS_DONE) || status.equals(TASK_IS_NOT_DONE);
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     /**
      * Marks this task as completed. If the task is not already marked as done,
      * it updates the completion status to indicate that the task is done.
@@ -71,6 +75,18 @@ public class Task {
         Pattern pattern = Pattern.compile(phrase.trim(), Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(this.description);
         return matcher.find();
+    }
+
+
+    /**
+     * Converts the task into its command representation.
+     * The command representation is used to prepopulate the text field
+     * for easily editing the task.
+     *
+     * @return a command string representation of the task.
+     */
+    public String toCommandString() {
+        return this.description;
     }
 
     /**

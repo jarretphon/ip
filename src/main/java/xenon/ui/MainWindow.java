@@ -56,6 +56,14 @@ public class MainWindow extends AnchorPane {
         String response = xenon.getResponse(input);
         String commandType = xenon.getCommandType();
 
+        // Prepopulate the user input field with the last modified task description
+        if (commandType.equals("EditCommand")) {
+            userInput.setText(response);
+            userInput.positionCaret(response.length());
+            userInput.requestFocus();
+            return;
+        }
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, xenonImage, commandType)
