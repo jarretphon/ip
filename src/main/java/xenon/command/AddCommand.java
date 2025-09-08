@@ -78,18 +78,15 @@ public class AddCommand extends Command {
 
         Task task = createTask();
         String response;
+        boolean inEditMode = CommandTracker.isEditing();
+        int index = CommandTracker.getLastModifiedIndex();
 
-        if (CommandTracker.isEditing()) {
-
-            Task originalTask = tasks.get(CommandTracker.getLastModifiedIndex());
-
-            if (originalTask.isDone()) {
-                task.markAsDone();
-            }
-
-            tasks.set(CommandTracker.getLastModifiedIndex(), task);
-            response = "Updated " + task;
+        if (inEditMode) {
+            Task originalTask = tasks.get(index);
+            copyCompletionStatus(originalTask, task);
+            tasks.set(index, task);
             CommandTracker.setEditing(false);
+            response = "Updated " + task;
         } else {
             tasks.add(task);
             response = "Added " + task;
@@ -115,6 +112,12 @@ public class AddCommand extends Command {
             return new Event(this.description, this.startDate, this.endDate);
         } else {
             return new TodoTask(this.description);
+        }
+    }
+
+    private void copyCompletionStatus(Task from, Task to) {
+        if (from.isDone()) {
+            to.markAsDone();
         }
     }
 }
