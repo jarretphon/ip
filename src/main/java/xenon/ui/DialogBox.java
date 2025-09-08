@@ -75,6 +75,7 @@ public class DialogBox extends HBox {
         case "MarkCommand":
         case "UnmarkCommand":
         case "DeleteCommand":
+        case "EditCommand":
             dialog.getStyleClass().add("success-label");
             break;
         case "Error":
