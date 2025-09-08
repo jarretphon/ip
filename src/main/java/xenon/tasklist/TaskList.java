@@ -25,6 +25,19 @@ public class TaskList {
         return this.tasks;
     }
 
+    public Task get(int index) throws XenonException {
+
+        if (index < 0 || index > tasks.size() - 1) {
+            throw new XenonException("Task " + (index + 1) + " does not exist in your list");
+        }
+
+        return this.tasks.get(index);
+    }
+
+    public void set(int index, Task task) {
+        this.tasks.set(index, task);
+    }
+
     /**
      * Adds a new {@code Task} to the task list.
      *

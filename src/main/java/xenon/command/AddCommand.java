@@ -3,6 +3,7 @@ package xenon.command;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+import xenon.CommandTracker;
 import xenon.exception.XenonException;
 import xenon.storage.Storage;
 import xenon.task.DeadlineTask;
@@ -76,7 +77,23 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Storage storage) throws XenonException {
 
         Task task = createTask();
-        tasks.add(task);
+        String response;
+
+        if (CommandTracker.isEditing()) {
+
+            Task originalTask = tasks.get(CommandTracker.getLastModifiedIndex());
+
+            if (originalTask.isDone()) {
+                task.markAsDone();
+            }
+
+            tasks.set(CommandTracker.getLastModifiedIndex(), task);
+            response = "Updated " + task;
+            CommandTracker.setEditing(false);
+        } else {
+            tasks.add(task);
+            response = "Added " + task;
+        }
 
         try {
             storage.saveData(tasks.getAll());
@@ -84,7 +101,7 @@ public class AddCommand extends Command {
             System.out.println("Unable to save data");
         }
 
-        return "added " + task;
+        return response;
     }
 
     private Task createTask() throws XenonException {

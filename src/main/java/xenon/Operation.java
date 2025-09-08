@@ -12,6 +12,7 @@ public enum Operation {
     FIND("find", "find <phrase>", "Find a task by searching for a phrase"),
     MARK("mark", "mark <task number>", "Mark a task as done"),
     UNMARK("unmark", "unmark <task number>", "Mark a task as undone"),
+    EDIT("edit", "edit <task number>", "Edit a task"),
     DELETE("delete", "delete <task number>", "Delete a task"),
     HELP("help", "help", "Displays a list of available commands"),
     BYE("bye", "bye", "Exit chatbot");
