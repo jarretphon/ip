@@ -47,6 +47,13 @@ public class DeadlineTask extends Task {
     }
 
     @Override
+    public String toCommandString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return "deadline " + this.description + " /by "
+                + this.deadline.format(formatter);
+    }
+
+    @Override
     public String toString() {
         // Date strings are displayed to the user with custom format dd MMM yyyy HH:mm
         return "[D]" + super.toString() + " (by: " + this.deadline.format(outputFormatter) + ")";

@@ -20,6 +20,16 @@ public class TodoTask extends Task {
         return "T | " + super.toStorageString();
     }
 
+    /**
+     * Converts the To-Do task into its command-line representation.
+     *
+     * @return a command string representation of the To-Do task
+     */
+    @Override
+    public String toCommandString() {
+        return "todo " + this.description;
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
