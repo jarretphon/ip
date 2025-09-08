@@ -17,6 +17,9 @@ mark
 mark 2
 mark 5
 unmark 2
+edit 3
+edit 5
+edit -1
 delete -1
 delete 2
 list
