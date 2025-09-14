@@ -24,21 +24,26 @@ Shows a message displaying all commands available and their usages. <br>
 Format: `help`
 <br>
 <br>
+
 ### Adding a task
 There are three types of tasks that can be added:
 * Todo Task
 * Deadline Task
 * Event Task
+<br>
+<br>
 
-#### Adding a Todo Task
+### Adding a Todo Task
 Adds a task Todo task to Xenon. <br>
 
 Format: `todo <task description>>` <br>
 Examples:
 * `todo return book`
 * `todo write report`
+<br>
+<br>
 
-#### Adding a Deadline Task
+### Adding a Deadline Task
 Adds a task Deadline task to Xenon. <br>
 
 Format: `deadline <task description>> /by <deadline>` <br>
@@ -46,8 +51,10 @@ Format: `deadline <task description>> /by <deadline>` <br>
 Examples:
 * `deadline assignment 1 /by 09/09/2025 09:30`
 * `deadline report 2 /by 18/09/2025 09:30`
+<br>
+<br>
 
-#### Adding an Event
+### Adding an Event
 Adds an Event to Xenon. <br>
 
 Format: `event <event description> /from <start date> /to <end date>` <br>
@@ -56,12 +63,14 @@ Examples:
 * `event camp /from 18/09/2025 09:30 /to 25/09/2025 18:30`
 <br>
 <br>
+
 ### Listing all tasks: `list`
 Lists all tasks in Xenon. <br>
 
 Format: `list`
 <br>
 <br>
+
 ### Deleting a task: `delete`
 Deletes the specified task from Xenon. <br>
 
@@ -72,6 +81,7 @@ Examples:
 * `delete 1`
 <br>
 <br>
+
 ### Editing a task: `edit`
 Edits the specified task in Xenon. <br>
 
@@ -83,6 +93,7 @@ Examples:
 * `edit 1`
 <br>
 <br>
+
 ### Marking a task as done: `mark`
 Marks the specified task as done in Xenon. <br>
 
@@ -93,6 +104,7 @@ Examples:
 * `mark 1`
 <br>
 <br>
+
 ### Marking a task as undone: `unmark`
 Marks the specified task as undone in Xenon. <br>
 
@@ -103,6 +115,7 @@ Examples:
 * `unmark 1`
 <br>
 <br>
+
 ### Finding tasks by keywords `find`
 Finds all tasks containing any of the given keywords. <br>
 
@@ -117,6 +130,7 @@ Examples:
 * `find assignment report`
 <br>
 <br>
+
 ### Exiting the program: `bye`
 Exits the program. <br>
 Format: `bye`
