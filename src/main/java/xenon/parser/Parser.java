@@ -126,6 +126,8 @@ public class Parser {
 
         assert taskNumber != null : "Task number cannot be null";
 
+        taskNumber = taskNumber.trim();
+
         if (taskNumber.isBlank()) {
             throw new XenonException("Please specify a task number.");
         }
