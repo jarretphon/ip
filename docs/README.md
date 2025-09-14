@@ -22,7 +22,8 @@ Notes about the command format:
 Shows a message displaying all commands available and their usages. <br>
 
 Format: `help`
-
+<br>
+<br>
 ### Adding a task
 There are three types of tasks that can be added:
 * Todo Task
@@ -53,12 +54,14 @@ Format: `event <event description> /from <start date> /to <end date>` <br>
 Examples:
 * `event meeting 1 /from 09/09/2025 09:30 /to 18/09/2025 18:30`
 * `event camp /from 18/09/2025 09:30 /to 25/09/2025 18:30`
-
+<br>
+<br>
 ### Listing all tasks: `list`
 Lists all tasks in Xenon. <br>
 
 Format: `list`
-
+<br>
+<br>
 ### Deleting a task: `delete`
 Deletes the specified task from Xenon. <br>
 
@@ -67,7 +70,8 @@ Format: `delete <task number>`
 * The task number must be a positive integer.
 Examples:
 * `delete 1`
-
+<br>
+<br>
 ### Editing a task: `edit`
 Edits the specified task in Xenon. <br>
 
@@ -77,7 +81,8 @@ Tip: The task to be edited will be prepopulated into the text field for ease of 
 ```
 Examples:
 * `edit 1`
-
+<br>
+<br>
 ### Marking a task as done: `mark`
 Marks the specified task as done in Xenon. <br>
 
@@ -86,7 +91,8 @@ Format: `done <task number>`
 * The task number must be a positive integer.
 Examples:
 * `mark 1`
-
+<br>
+<br>
 ### Marking a task as undone: `unmark`
 Marks the specified task as undone in Xenon. <br>
 
@@ -95,7 +101,8 @@ Format: `undone <task number>`
 * The task number must be a positive integer.
 Examples:
 * `unmark 1`
-
+<br>
+<br>
 ### Finding tasks by keywords `find`
 Finds all tasks containing any of the given keywords. <br>
 
@@ -108,12 +115,15 @@ Examples:
 * `find assignment`
 * `find report`
 * `find assignment report`
-
+<br>
+<br>
 ### Exiting the program: `bye`
 Exits the program. <br>
 Format: `bye`
-
+<br>
+<br>
 ## Command summary
+
 | Command           |                                                    Format and Examples                                                     | 
 |:------------------|:--------------------------------------------------------------------------------------------------------------------------:|
 | Add Todo task     |                                     `todo <description>` <br/> e.g. `todo return book`                                     |
