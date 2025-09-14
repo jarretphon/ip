@@ -45,7 +45,6 @@ public class DeleteCommand extends Command {
             System.out.println("Unable to save data");
         }
 
-        //ui.showResponse("Noted. I've removed this task\n" + "\t" + deletedTask);
         return "Noted. I've removed this task\n" + "\t" + deletedTask;
     }
 }

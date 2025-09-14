@@ -20,7 +20,6 @@ public class HelpCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        //ui.showResponse(Operation.showUsageGuide());
         return Operation.showUsageGuide();
     }
 }
