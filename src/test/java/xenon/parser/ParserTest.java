@@ -39,6 +39,11 @@ public class ParserTest {
         }
     }
 
+    /*
+     * JetBrains AI was used to generate the following tests. The test was generated using context from the codebase,
+     * making it more efficient than writing it from scratch.
+     *
+     * */
     @Test
     public void tokenise_validInput_correctTokens() throws XenonException {
         assertArrayEquals(new String[]{"task 1", "28/08/2025"},

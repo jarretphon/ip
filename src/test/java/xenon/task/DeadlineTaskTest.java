@@ -6,6 +6,12 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
+/*
+ * JetBrains AI was used to generate this test. The test was generated using context from the codebase,
+ * making it more efficient than writing it from scratch.
+ *
+ * */
+
 public class DeadlineTaskTest {
 
     @Test

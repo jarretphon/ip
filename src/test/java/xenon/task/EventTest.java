@@ -10,6 +10,12 @@ import org.junit.jupiter.api.Test;
 
 import xenon.exception.XenonException;
 
+/*
+ * JetBrains AI was used to generate this test. The test was generated using context from the codebase,
+ * making it more efficient than writing it from scratch.
+ *
+ * */
+
 public class EventTest {
 
     @Test
