@@ -16,10 +16,10 @@ public class DeadlineTaskTest {
 
     @Test
     public void toCommandString_validDeadline_success() throws Exception {
-        LocalDateTime deadline = LocalDateTime.of(2025, 12, 31, 23, 59);
+        LocalDateTime deadline = LocalDateTime.of(2026, 12, 31, 23, 59);
         DeadlineTask task = new DeadlineTask("Finish report", deadline);
         String commandString = task.toCommandString();
 
-        assertEquals("deadline Finish report /by 31/12/2025 23:59", commandString);
+        assertEquals("deadline Finish report /by 31/12/2026 23:59", commandString);
     }
 }

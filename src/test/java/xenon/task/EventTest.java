@@ -17,11 +17,11 @@ import xenon.exception.XenonException;
 public class EventTest {
 
     @Test
-    public void testToCommandString_validDates() throws XenonException {
-        LocalDateTime start = LocalDateTime.of(2025, 9, 15, 10, 0);
-        LocalDateTime end = LocalDateTime.of(2025, 9, 15, 12, 0);
+    public void testToCommandString_validDates_returnsCorrectCommand() throws XenonException {
+        LocalDateTime start = LocalDateTime.of(2026, 9, 15, 10, 0);
+        LocalDateTime end = LocalDateTime.of(2026, 9, 15, 12, 0);
         Event event = new Event("Meeting", start, end);
-        String expected = "event Meeting /from 15/09/2025 10:00 /to 15/09/2025 12:00";
+        String expected = "event Meeting /from 15/09/2026 10:00 /to 15/09/2026 12:00";
         assertEquals(expected, event.toCommandString());
     }
 }
